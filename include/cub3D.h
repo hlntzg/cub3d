@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:55:19 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:07:26 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ int			get_texture(t_game *game);
 /* FREE */
 void		free_char_array(char **array);
 void		free_game(t_game *game);
+void		exit_game(t_game *game);
 
 #endif

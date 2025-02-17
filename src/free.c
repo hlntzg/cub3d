@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:57:40 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:07:23 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	free_game(t_game *game)
 	if (game->img)
 		free_images(game);
 
+}
+
+void	exit_game(t_game *game)
+{
+	free_game(game);
 	mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
 	exit (0);

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:16:18 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:49:05 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:13:15 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,6 @@ int	is_accessible(t_data *data)
 	error = fill(data, data->map_size, data->player_start.y, data->player_start.x);
 	free_char_array(data->map_access);
 	if (error)
-	{
-		ft_putstr_fd("Error\nMap is not enclosed by walls!\n", 2);
 		return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_events.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:40:36 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/17 13:58:04 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 14:06:17 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	game_events(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		free_game(game);
+		exit_game(game);
 	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
 		printf("key pressed: A\n");
 	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))

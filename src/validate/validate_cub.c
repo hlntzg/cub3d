@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:11:53 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/14 15:57:46 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:53:08 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	validate_extension(char *name, char a, char b, char c)
 	len = ft_strlen(name);
 	if (len < 5)
 		return (EXIT_FAILURE);
-	//if (len > 5 && name[len - 5])
+	if (len > 5 && (name[len - 5] == ' ' || name[len - 5] == '/'))
+		return (EXIT_FAILURE);
 	if (name[len - 4] == '.' && name[len - 3] == a && name[len - 2] == b
 		&& name[len - 1] == c)
 		return (EXIT_SUCCESS);
@@ -39,7 +40,13 @@ int	validate_cub(char *map_name, t_game *game)
 		return (EXIT_FAILURE);
 	exit += validate_texture(cub_content, game);
 	exit += validate_rgb(cub_content, game);
+	if (exit != 0)
+		return (EXIT_FAILURE);
 	exit += read_copy_map(cub_content, game->data);
+	if (exit != 0)
+		return (EXIT_FAILURE);
+	exit += valid_chars(game->data);
+	exit += is_accessible(game->data);
 	if (exit != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

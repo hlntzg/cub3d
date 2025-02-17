@@ -6,31 +6,31 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/14 17:45:30 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:48:07 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static void	free_map(t_data *data)
+void	free_char_array(char **array)
 {
-	int	i;
+	int i;
 
-	if (!data->map)
+	if (!array)
 		return ;
 	i = 0;
-	while (data->map[i])
+	while (array[i])
 	{
-		free(data->map[i]);
+		free(array[i]);
 		i++;
 	}
-	free(data->map);
+	free(array);
 }
 
 static void	free_data(t_data *data)
 {
 	if (data->map)
-		free_map(data);
+		free_char_array(data->map);
 	if (data->no)
 		free(data->no);
 	if (data->so)
@@ -39,8 +39,6 @@ static void	free_data(t_data *data)
 		free(data->we);
 	if (data->ea)
 		free(data->ea);
-	if (data->player_start)
-		free(data->player_start);
 }
 
 /*static void	free_images(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:41:10 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/14 15:50:31 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:54:24 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	start_game(t_game *game)
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (get_texture(game) == 1)
 		return (EXIT_FAILURE);
+	mlx_key_hook(game->mlx, &game_events, game);
 	return (EXIT_SUCCESS);
 }
 

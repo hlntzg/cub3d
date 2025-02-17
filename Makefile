@@ -6,7 +6,7 @@
 #    By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/22 15:11:19 by jmouette          #+#    #+#              #
-#    Updated: 2025/02/14 14:41:22 by jmouette         ###   ########.fr        #
+#    Updated: 2025/02/17 12:54:11 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ HEADER			= ./include/cub3D.h
 
 SRCS			= main.c init_game.c validate/validate_cub.c validate/validate_textures.c\
 				validate/validate_rgb.c validate/utils_validate.c validate/copy_map.c\
-				read_map.c free.c images.c
+				read_map.c free.c images.c game_events.c
 
 SOURCES_DIR		= src
 OBJS_DIR		= obj

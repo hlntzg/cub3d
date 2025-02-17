@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:07:23 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:35:00 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_char_array(char **array)
 {
-	int i;
+	int	i;
 
 	if (!array)
 		return ;
@@ -60,7 +60,6 @@ void	free_game(t_game *game)
 		free(game->data);
 	if (game->img)
 		free_images(game);
-
 }
 
 void	exit_game(t_game *game)

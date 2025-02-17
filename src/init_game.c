@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:25:00 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:34:10 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	init_data(t_data *data)
 	data->ceiling = 0;
 	data->lines = 0;
 	data->columns = 0;
-	data->player_start.x = 0;
-	data->player_start.y = 0;
+	data->player_pos.x = 0;
+	data->player_pos.y = 0;
 	return (0);
 }
 

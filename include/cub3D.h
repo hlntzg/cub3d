@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:07:26 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:34:09 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_data
 	int			columns;
 	uint32_t	floor;
 	uint32_t	ceiling;
-	t_coord		player_start;
+	t_coord		player_pos;
 	t_coord		map_size;
 }	t_data;
 

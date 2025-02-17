@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:16:18 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:13:15 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:36:41 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ static int	fill(t_data *data, t_coord size, int row, int col)
 		return (EXIT_FAILURE);
 	}
 	data->map_access[row][col] = '1';
-	if (fill(data, size, row - 1, col) ||
-		fill(data, size, row + 1, col) ||
-		fill(data, size, row, col - 1) ||
-		fill(data, size, row, col + 1))
+	if (fill(data, size, row - 1, col)
+		|| fill(data, size, row + 1, col)
+		|| fill(data, size, row, col - 1)
+		|| fill(data, size, row, col + 1))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -75,7 +75,7 @@ int	is_accessible(t_data *data)
 		}
 		i++;
 	}
-	error = fill(data, data->map_size, data->player_start.y, data->player_start.x);
+	error = fill(data, data->map_size, data->player_pos.y, data->player_pos.x);
 	free_char_array(data->map_access);
 	if (error)
 		return (EXIT_FAILURE);

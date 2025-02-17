@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:40:36 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/17 12:57:03 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:58:04 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,7 @@ void	game_events(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		printf("key pressed: ESCAPE\n");
-		mlx_delete_image(game->mlx, game->img->no);
-		mlx_delete_image(game->mlx, game->img->ea);
-		mlx_delete_image(game->mlx, game->img->so);
-		mlx_delete_image(game->mlx, game->img->we);
-		mlx_delete_image(game->mlx, game->img->ce);
-		mlx_delete_image(game->mlx, game->img->fl);
-		mlx_close_window(game->mlx);
-		mlx_terminate(game->mlx);
-		exit (0);
-	}
+		free_game(game);
 	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
 		printf("key pressed: A\n");
 	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:16:58 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:57:40 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	free_data(t_data *data)
 		free(data->ea);
 }
 
-/*static void	free_images(t_game *game)
+static void	free_images(t_game *game)
 {
 	if (game->img->no)
 		mlx_delete_image(game->mlx, game->img->no);
@@ -51,12 +51,17 @@ static void	free_data(t_data *data)
 		mlx_delete_image(game->mlx, game->img->we);
 	if (game->img->ea)
 		mlx_delete_image(game->mlx, game->img->ea);
-}*/
+}
 
 void	free_game(t_game *game)
 {
 	free_data(game->data);
 	if (game->data)
 		free(game->data);
-	//free_images(game);
+	if (game->img)
+		free_images(game);
+
+	mlx_close_window(game->mlx);
+	mlx_terminate(game->mlx);
+	exit (0);
 }

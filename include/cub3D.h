@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:33:24 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:55:19 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_game
 int			init_game(t_game *game);
 
 /* GAME */
-void		key_and_arrowkey_press(mlx_key_data_t keydata, void *param);
+void		game_events(mlx_key_data_t keydata, void *param);
 
 /* VALIDATE_CUB */
 int			validate_cub(char *map_name, t_game *game);

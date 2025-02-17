@@ -6,11 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/14 15:49:02 by jmouette         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/17 11:26:49 by jmouette         ###   ########.fr       */
->>>>>>> 50b06aa15b0e7418e861f79445118d84fa569d45
+/*   Updated: 2025/02/17 13:25:00 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +31,8 @@ static int	init_data(t_data *data)
 	data->ceiling = 0;
 	data->lines = 0;
 	data->columns = 0;
-<<<<<<< HEAD
-	data->player_start = ft_calloc(1, sizeof(t_coord));
-	if (!data->player_start)
-		return (ft_putstr_fd("Error : calloc failed for player start", 2), 1);
-	data->player_start->x = 0;
-	data->player_start->y = 0;
-=======
 	data->player_start.x = 0;
 	data->player_start.y = 0;
->>>>>>> 50b06aa15b0e7418e861f79445118d84fa569d45
 	return (0);
 }
 

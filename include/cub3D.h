@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:12:54 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:22:39 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_data
 	int			columns;
 	uint32_t	floor;
 	uint32_t	ceiling;
-	t_coord		*player_start;
 	t_coord		player_start;
 	t_coord		map_size;
 }	t_data;
@@ -83,7 +82,7 @@ typedef struct s_game
 int			init_game(t_game *game);
 
 /* GAME */
-void	key_and_arrowkey_press(mlx_key_data_t keydata, void *param);
+void		key_and_arrowkey_press(mlx_key_data_t keydata, void *param);
 
 /* VALIDATE_CUB */
 int			validate_cub(char *map_name, t_game *game);

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:42:55 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:13:48 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:45:38 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ static uint32_t	extract_rgb(char **map, int i, int j, uint32_t rbg_type)
 	if (rgb == NULL)
 		return (ft_putstr_fd("Error : calloc failed for rgb", 2), 1);
 	rgb = extract(map, i, j, rgb);
-	printf("rgb %s\n", rgb);
-	if (check_rgb(rgb) == 1)
-		return (EXIT_FAILURE);
 	if (check_rgb(rgb) == 1)
 	{
 		free(rgb);

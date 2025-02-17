@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:22:39 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:33:24 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_data
 	char		*we;
 	char		*ea;
 	char		**map;
-	char		*dir_player;
 	char		**map_access;
 	char		dir_player;
 	int			lines;

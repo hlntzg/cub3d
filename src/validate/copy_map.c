@@ -6,7 +6,11 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 14:53:34 by jmouette          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/14 17:46:23 by jmouette         ###   ########.fr       */
+=======
+/*   Updated: 2025/02/17 12:53:53 by jmouette         ###   ########.fr       */
+>>>>>>> 50b06aa15b0e7418e861f79445118d84fa569d45
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +48,11 @@ static int	copy_map(t_data *data, char **cub_content, int map_start, int i)
 
 	j = 0;
 	if (map_start == -1)
+<<<<<<< HEAD
 		return (ft_putstr_fd("Exit\nNo map found.\n", 2), EXIT_FAILURE);
+=======
+		return (ft_putstr_fd("Error\nNo map found.\n", 2), EXIT_FAILURE);
+>>>>>>> 50b06aa15b0e7418e861f79445118d84fa569d45
 	data->map = malloc(sizeof(char *) * (i - map_start + 1));
 	if (!data->map)
 		return (ft_putstr_fd("Error\nMalloc failed for map\n", 2), EXIT_FAILURE);
@@ -58,10 +66,13 @@ static int	copy_map(t_data *data, char **cub_content, int map_start, int i)
 		j++;
 	}
 	data->map[j] = NULL;
+<<<<<<< HEAD
 	// Afficher la map
 	/*printf("Map copied:\n");
 	for (int k = 0; data->map[k] != NULL; k++)
 		printf("%s\n", data->map[k]);*/
+=======
+>>>>>>> 50b06aa15b0e7418e861f79445118d84fa569d45
 	return (0);
 }
 

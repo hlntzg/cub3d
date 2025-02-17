@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 12:50:37 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/17 13:12:54 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,15 @@ typedef struct s_data
 	char		*ea;
 	char		**map;
 	char		*dir_player;
+	char		**map_access;
+	char		dir_player;
 	int			lines;
 	int			columns;
 	uint32_t	floor;
 	uint32_t	ceiling;
 	t_coord		*player_start;
-
+	t_coord		player_start;
+	t_coord		map_size;
 }	t_data;
 
 typedef struct s_game
@@ -89,6 +92,12 @@ int			validate_extension(char *map_name, char a, char b, char c);
 /* MAP */
 int			read_copy_map(char **cub_content, t_data *data);
 
+/* VALIDATE_MAP */
+int			valid_chars(t_data *data);
+
+/* VALIDATE_WALLS */
+int			is_accessible(t_data *data);
+
 /* VALIDATE_TEXTURES */
 int			validate_texture(char **map, t_game *game);
 
@@ -109,6 +118,7 @@ char		**read_map(char *path);
 int			get_texture(t_game *game);
 
 /* FREE */
+void		free_char_array(char **array);
 void		free_game(t_game *game);
 
 #endif

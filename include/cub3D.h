@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:34:09 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:58:26 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_txtr
 	mlx_texture_t	*fl;
 }	t_txtr;
 
-typedef struct s_img
+/*typedef struct s_img
 {
 	mlx_image_t	*no;
 	mlx_image_t	*ea;
@@ -48,7 +48,7 @@ typedef struct s_img
 	mlx_image_t	*we;
 	mlx_image_t	*ce;
 	mlx_image_t	*fl;
-}	t_img;
+}	t_img;*/
 
 typedef struct s_data
 {
@@ -72,7 +72,7 @@ typedef struct s_game
 	mlx_t	*mlx;
 	t_data	*data;
 	t_txtr	*txtr;
-	t_img	*img;
+	//t_img	*img;
 }	t_game;
 
 /* MAIN */

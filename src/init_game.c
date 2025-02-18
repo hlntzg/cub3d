@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:34:10 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:58:52 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	init_game(t_game *game)
 	game->txtr = ft_calloc(1, sizeof(t_txtr));
 	if (!game->txtr)
 		return (ft_putstr_fd("Error : calloc failed for game->txtr", 2), 1);
-	game->img = ft_calloc(1, sizeof(t_img));
+	/*game->img = ft_calloc(1, sizeof(t_img));
 	if (!game->img)
-		return (ft_putstr_fd("Error : calloc failed for game->img", 2), 1);
+		return (ft_putstr_fd("Error : calloc failed for game->img", 2), 1);*/
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/18 12:59:22 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:09:02 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	free_images(t_game *game)
 		mlx_delete_texture(game->txtr->we);
 	if (game->txtr->ea)
 		mlx_delete_texture(game->txtr->ea);
+	free(game->txtr);
 }
 
 void	free_game(t_game *game)

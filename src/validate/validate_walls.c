@@ -6,31 +6,11 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:16:18 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:36:41 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:03:35 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static void	position_size(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j] != '\0')
-		{
-			if (data->map_size.x < j)
-				data->map_size.x = j;
-			j++;
-		}
-		i++;
-	}
-	data->map_size.y = i;
-}
 
 static int	fill(t_data *data, t_coord size, int row, int col)
 {
@@ -61,7 +41,6 @@ int	is_accessible(t_data *data)
 	int		error;
 
 	i = 0;
-	position_size(data);
 	data->map_access = ft_calloc(data->map_size.y + 1, sizeof(char *));
 	if (!data->map_access)
 		return (ft_putstr_fd("Error\nMemory allocation failed!\n", 2), 1);

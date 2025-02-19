@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/19 14:35:26 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/19 15:14:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ typedef struct s_player
 typedef struct s_raycast
 {
 	double		camera;
-	double		distance_to_the_wall;
 	double		wall_x;
-	int			wall_x_top_pixel;
-	int			wall_x_bottom_pixel;
-	int			height_of_the_wall;
+	double		wx_distance;
+	int			wx_top_pixel;
+	int			wx_bottom_pixel;
+	int			wx_height;
 	int			boundary;
 	t_coord		map;
 	t_coord		step_dir;
@@ -116,12 +116,22 @@ typedef struct s_game
 }	t_game;
 
 /* MAIN */
+void		rendering_game(t_game *game);
+
+/* RAYCASTING */
+void		raycasting(t_game *game);
+void		get_ray_direction(t_player *player, t_raycast *ray, int x);
+void		get_delta_distance(t_player *player, t_raycast *ray);
+void		get_steps_distance(t_player *player, t_raycast *ray);
+void		get_wall_distance_and_height(t_game *game, t_raycast *ray);
+void		get_wall_projection_pixels(t_player *player, t_raycast *ray);
 
 /* INIT_GAME */
 int			init_game(t_game *game);
 
 /* GAME */
 void		game_events(mlx_key_data_t keydata, void *param);
+void		set_player(t_game *game, t_player *player);
 
 /* VALIDATE_CUB */
 int			validate_cub(char *map_name, t_game *game);

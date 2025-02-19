@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:53:36 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 13:24:02 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:19:42 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	validate_rgb_split(char **rgb_split)
 	if (count != 3)
 	{
 		ft_putstr_fd("Error\nInvalid rgb color.\n", 2);
-		free_char_array(rgb_split);
 		return (EXIT_FAILURE);
 	}
 	count = 0;
@@ -86,7 +85,6 @@ int	validate_rgb_split(char **rgb_split)
 		if (color < 0 || color > 255)
 		{
 			ft_putstr_fd("Error\nInvalid rgb color.\n", 2);
-			free_char_array(rgb_split);
 			return (EXIT_FAILURE);
 		}
 		count++;

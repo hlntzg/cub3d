@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:22:54 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 14:36:09 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:49:27 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 static int	check_char(t_data *data, int i, int j, int *count)
 {
-	if (data->map[i][j] != '0' && data->map[i][j] != '1'
-		&& data->map[i][j] != 'N' && data->map[i][j] != 'S'
-		&& data->map[i][j] != 'E' && data->map[i][j] != 'W'
-		&& data->map[i][j] != ' ' && data->map[i][j] != '\t')
-		return (ft_putstr_fd("Error\nWrong map component.\n", 2), 1);
-	if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
-		|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
+	const char	c = data->map[i][j];
+
+	if (c != '0' && c != '1' && c != 'N' && c != 'S'
+		&& c != 'E' && c != 'W' && c != ' ' && c != '\t')
 	{
-		data->dir_player = data->map[i][j];
+		ft_putstr_fd("Error\nWrong map component.\n", 2);
+		return (EXIT_FAILURE);
+	}
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		data->dir_player = c;
 		data->player_pos.x = j;
 		data->player_pos.y = i;
 		(*count)++;
 	}
-	return (2);
+	return (EXIT_SUCCESS);
 }
 
 int	valid_chars(t_data *data)

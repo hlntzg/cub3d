@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/19 15:08:07 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:03:56 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	get_wall_distance_and_height(t_game *game, t_raycast *ray)
 			ray->step.y += ray->delta.y;
 			ray->map.y += ray->step_dir.y;
 		}
-		if (map[ray->map.y][ray->map.x] == '1') // y, x not x, y ????
+		// where to get this map[][] ?
+		if (ft_strcmp(game->data->map[ray->map.y][ray->map.x], "1")) // y, x not x, y ????
 			break ;
 	}
 	if (ray->boundary == 0)

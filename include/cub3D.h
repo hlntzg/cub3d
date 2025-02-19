@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/18 15:14:58 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:35:26 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,25 @@
 # define WIDTH		1920
 # define HEIGHT		1080
 
+typedef enum s_orientation
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}	t_orientation;
+
 typedef struct s_coord
 {
 	int		x;
 	int		y;
 }	t_coord;
+
+typedef struct s_coordd
+{
+	double	x;
+	double	y;
+}	t_coordd;
 
 typedef struct s_txtr
 {
@@ -67,12 +81,38 @@ typedef struct s_data
 	t_coord		map_size;
 }	t_data;
 
+typedef struct s_player
+{
+	int			view;
+	t_coordd	position;
+	t_coordd	d;
+	t_coordd	p;
+}	t_player;
+
+typedef struct s_raycast
+{
+	double		camera;
+	double		distance_to_the_wall;
+	double		wall_x;
+	int			wall_x_top_pixel;
+	int			wall_x_bottom_pixel;
+	int			height_of_the_wall;
+	int			boundary;
+	t_coord		map;
+	t_coord		step_dir;
+	t_coordd	step;
+	t_coordd	delta;
+	t_coordd	direction;
+}	t_raycast;
+
 typedef struct s_game
 {
-	mlx_t	*mlx;
-	t_data	*data;
-	t_txtr	*txtr;
-	//t_img	*img;
+	mlx_t		*mlx;
+	t_data		*data;
+	t_txtr		*txtr;
+	//t_img		*img;
+	t_player	*player;
+	t_raycast	*ray;
 }	t_game;
 
 /* MAIN */

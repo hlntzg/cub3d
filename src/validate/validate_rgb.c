@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:42:55 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/19 13:27:30 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:46:39 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,13 @@ static uint32_t	extract_rgb(char **map, int i, int j, uint32_t rbg_type)
 		return (ft_putstr_fd("Error : calloc failed for rgb", 2), '\0');
 	extract(map, i, j, rgb);
 	if (check_rgb(rgb) == 1)
-	{
-		free(rgb);
-		return ('\0');
-	}
+		return (free(rgb), '\0');
 	rgb_split = ft_split(rgb, ',');
 	free(rgb);
 	if (!rgb_split)
 		return ('\0');
 	if (validate_rgb_split(rgb_split) == 1)
-	{
-		free_char_array(rgb_split);
-		return ('\0');
-	}
+		return (free_char_array(rgb_split), '\0');
 	rbg_type = create_color(ft_atoi(rgb_split[0]), \
 			ft_atoi(rgb_split[1]), ft_atoi(rgb_split[2]));
 	free_char_array(rgb_split);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_pixels.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:13:31 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/19 16:42:34 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:54:13 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_map(t_game *game)
 
 void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 {
-	ray->wall_x = ray->wall_x - (floor(ray->wall_x);
+	ray->wall_x = ray->wall_x - (floor(ray->wall_x));
 
 	//  get the pixels of the x wall strip 
 }

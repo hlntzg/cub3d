@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:40:36 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/17 14:06:17 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:06:15 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,52 @@
 
 void	game_events(mlx_key_data_t keydata, void *param)
 {
-	t_game	*game;
-
+	t_game *game;
+	
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit_game(game);
-	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
-		printf("key pressed: A\n");
-	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))
-		printf("key pressed: D\n");
-	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS))
-		printf("key pressed: S\n");
-	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		printf("key pressed: W\n");
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		printf("key pressed: LEFT\n");
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		printf("key pressed: RIGHT\n");
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{
+		if (keydata.key == MLX_KEY_A)
+			game->player->move_left = true;
+		else if (keydata.key == MLX_KEY_D)
+			game->player->move_right = true;
+		else if (keydata.key == MLX_KEY_S)
+			game->player->move_backward = true;
+		else if (keydata.key == MLX_KEY_W)
+			game->player->move_forward = true;
+		else if (keydata.key == MLX_KEY_LEFT)
+			game->player->rotate_left = true;
+		else if (keydata.key == MLX_KEY_RIGHT)
+			game->player->rotate_right = true;
+	}
+	if (keydata.action == MLX_RELEASE)
+	{
+		game->player->move_left = false;
+		game->player->move_right = false;
+		game->player->move_backward = false;
+		game->player->move_forward = false;
+		game->player->rotate_left = false;
+		game->player->rotate_right = false;
+	}
+}
+
+void	move_player(void *param)
+{
+	t_game *game;
+	
+	game = (t_game *)param;
+	if (game->player->move_left)
+		move_player_left(game);
+	else if (game->player->move_right)
+		move_player_right(game);
+	else if (game->player->move_backward)
+		move_player_backward(game);
+	else if (game->player->move_forward)
+		move_player_forward(game);
+	else if (game->player->rotate_left)
+		rotate_player_left(game);
+	else if (game->player->rotate_right)
+		rotate_player_right(game);
 }

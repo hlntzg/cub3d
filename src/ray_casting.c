@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/19 16:03:56 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/19 16:45:56 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	get_steps_distance(t_player *player, t_raycast *ray)
 	else
 	{
 		ray->step_dir.x = -1;
-		ray->step.x = (player->position.x - ray->map.x) * ray->dalta.x;
+		ray->step.x = (player->position.x - ray->map.x) * ray->delta.x;
 	}
 	if (ray->direction.y > 0)
 	{
@@ -49,7 +49,7 @@ void	get_steps_distance(t_player *player, t_raycast *ray)
 	else
 	{
 		ray->step_dir.y = -1;
-		ray->step.y = (player->position.y - ray->map.y) * ray->dalta.y;
+		ray->step.y = (player->position.y - ray->map.y) * ray->delta.y;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/19 15:14:13 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/19 17:06:27 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define WIDTH		1920
 # define HEIGHT		1080
+# define MOVE_SPEED	0.1
+# define ROT_SPEED	0.5
 
 typedef enum s_orientation
 {
@@ -84,6 +86,12 @@ typedef struct s_data
 typedef struct s_player
 {
 	int			view;
+	bool		move_left;
+	bool		move_right;
+	bool		move_backward;
+	bool		move_forward;
+	bool		rotate_left;
+	bool		rotate_right;
 	t_coordd	position;
 	t_coordd	d;
 	t_coordd	p;
@@ -131,7 +139,18 @@ int			init_game(t_game *game);
 
 /* GAME */
 void		game_events(mlx_key_data_t keydata, void *param);
+void		move_player(void *param);
 void		set_player(t_game *game, t_player *player);
+
+/* MOVE_PLAYER */
+void		move_player_left(t_game *game);
+void		move_player_right(t_game *game);
+void		move_player_forward(t_game *game);
+void		move_player_backward(t_game *game);
+
+/* ROTATE_PLAYER */
+void		rotate_player_right(t_game *game);
+void		rotate_player_left(t_game *game);
 
 /* VALIDATE_CUB */
 int			validate_cub(char *map_name, t_game *game);

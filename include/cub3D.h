@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/19 17:06:27 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/20 11:29:28 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define WIDTH		1920
 # define HEIGHT		1080
+# define TXTR_PIXEL	64
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.5
 
@@ -113,6 +114,13 @@ typedef struct s_raycast
 	t_coordd	direction;
 }	t_raycast;
 
+typedef struct s_render
+{
+	int			*txtr_buf[4];
+	int			**pixels;
+
+}	t_render;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
@@ -121,6 +129,7 @@ typedef struct s_game
 	//t_img		*img;
 	t_player	*player;
 	t_raycast	*ray;
+	t_render	*render;
 }	t_game;
 
 /* MAIN */
@@ -133,6 +142,11 @@ void		get_delta_distance(t_player *player, t_raycast *ray);
 void		get_steps_distance(t_player *player, t_raycast *ray);
 void		get_wall_distance_and_height(t_game *game, t_raycast *ray);
 void		get_wall_projection_pixels(t_player *player, t_raycast *ray);
+
+/* RENDERING */
+void		set_pixel_map(t_game *game);
+void		get_wall_pixels(t_game *game, t_raycast *ray, int x);
+void		rendering_image(t_game *game);
 
 /* INIT_GAME */
 int			init_game(t_game *game);

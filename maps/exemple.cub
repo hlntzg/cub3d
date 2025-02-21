@@ -1,13 +1,13 @@
 F                                       255,255,255
 
 
-WE               ./textures/wall_west.png
+WE               ./textures/blue.png
 
-NO ./textures/wall_north.png
-SO               ./textures/wall_south.png
-        EA       ./textures/wall_east.png
+NO ./textures/red.png
+SO               ./textures/green.png
+        EA       ./textures/purple.png
 	
-C 2,2,2
+C 0,0,0
 1111111111111111111111111
 1000000000000000000000001
 1000000000000000000000001
@@ -21,5 +21,5 @@ C 2,2,2
 1000000000000000000000001
 1000000000000000000000001
 1000000000000000000000001
-100000000000N000000000001
+1E00000000000000000000001
 1111111111111111111111111

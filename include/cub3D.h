@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 15:27:37 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:32:34 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void		get_wall_distance_and_height(t_game *game, t_raycast *ray);
 void		get_wall_projection_pixels(t_player *player, t_raycast *ray);
 
 /* RENDERING */
-void		set_pixel_map(t_game *game);
 void		get_wall_pixels(t_game *game, t_raycast *ray, int x);
 void		rendering_image(t_game *game);
 

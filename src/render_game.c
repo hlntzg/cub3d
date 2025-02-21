@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 14:52:22 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:32:30 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	rendering_game(void *param)
 	
 	game = (t_game *)param;
 	move_player(game);
-	set_pixel_map(game);
 	raycasting(game);
 	rendering_image(game); // WIP
 }
@@ -39,24 +38,6 @@ void	raycasting(t_game *game)
 		get_wall_projection_pixels(game->player, ray);
 		get_wall_pixels(game, ray, x);
 		x++;
-	}
-}
-
-// set up a 2D array pixel map for the screen - window(width, height)
-void	set_pixel_map(t_game *game)
-{
-	int	y;
-
-	y = 0;
-	game->render->pixels = ft_calloc((HEIGHT + 1), sizeof(uint32_t *));
-	if (!game->render->pixels)
-		return ; // return NULL
-	while (y < HEIGHT)
-	{
-		game->render->pixels[y] = ft_calloc(WIDTH, sizeof(uint32_t));
-		if (!game->render->pixels[y])
-			return ; // free array
-		y++;
 	}
 }
 

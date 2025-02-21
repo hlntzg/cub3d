@@ -6,28 +6,28 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 14:15:02 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:32:38 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-// static void	free_pixels(t_game *game)
-// {
-// 	int i;
+static void	free_pixels(uint32_t **array)
+{
+	int i;
 
-// 	if (!game->render->pixels)
-// 		return;
-
-// 	i = 0;
-// 	while (i < HEIGHT)
-// 	{
-// 		free(game->render->pixels[i]);
-// 		i++;
-// 	}
-// 	free(game->render->pixels);
-// 	game->render->pixels = NULL;
-// }
+	if (!array)
+		return;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	free(array);
+	array = NULL;
+}
 
 void	free_char_array(char **array)
 {
@@ -56,6 +56,8 @@ static void	free_data(t_data *data)
 		free(data->we);
 	if (data->ea)
 		free(data->ea);
+	if (data)
+		free(data);
 }
 
 void	free_images(t_game *game)
@@ -82,16 +84,16 @@ void	free_images(t_game *game)
 void	free_game(t_game *game)
 {
 	free_data(game->data);
-	if (game->data)
-		free(game->data);
+	//if(game->render->txtr_buf)
+	//free_pixels(game->render->txtr_buf);
+	if(game->render->pixels)
+		free_pixels(game->render->pixels);
 	if (game->player)
 		free(game->player);
 	if (game->ray)
 		free(game->ray);
 	if (game->render)
 		free(game->render);
-	// if(game->render->pixels)
-	// 	free_pixels(game);
 }
 
 void	exit_game(t_game *game)

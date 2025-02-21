@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:28:52 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 11:32:33 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:56:54 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ uint32_t	store_color(int i, int j, mlx_texture_t *texture)
 int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 {
 	uint32_t	*pixels;
-	int			i;
-	int			j;
+	uint32_t	i;
+	uint32_t	j;
 
+	i = 0;
 	pixels = ft_calloc(texture->height * texture->width, sizeof(uint32_t));
 	if (!pixels)
 		return (EXIT_FAILURE);
 	while (i < texture->height)
 	{
+		j = 0;
 		while (j < texture->width)
 		{
 			pixels[i * texture->width + j] = store_color(i, j, texture);
@@ -52,25 +54,36 @@ int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 
 int	get_texture(t_game *game)
 {
-	mlx_texture_t	*txtr[4];
-	char			*path[4];
-	int				i;
+	//mlx_texture_t	*txtr[4];
+	//char			*path[4];
+	//int				i;
 
-	path[0] = game->txtr->no;
-	path[1] = game->txtr->so;
-	path[2] = game->txtr->we;
-	path[3] = game->txtr->ea;
-	i = 0;
-	while (i < 4)
-	{
-		txtr[i] = mlx_load_png(path[i]);
-		if (!txtr[i])
-			return (ft_putstr_fd("Error\nFailed to load texture\n", 2), EXIT_FAILURE);
-		if (!(set_texture_buffer(game, txtr[i], i)))
-			return (ft_putstr_fd("Error\nFailed to convert texture\n", 2), EXIT_FAILURE);
-		mlx_delete_texture(txtr[i]);
-		i++;
-	}
+	// path[0] = (char *)game->txtr->no;
+	// path[1] = (char *)game->txtr->so;
+	// path[2] = (char *)game->txtr->we;
+	// path[3] = (char *)game->txtr->ea;
+	// i = 0;
+	// while (i < 4)
+	// {
+	// 	// txtr[i] = mlx_load_png(path[i]);
+	// 	// if (!txtr[i])
+	// 	// 	return (ft_putstr_fd("Error\nFailed to load texture\n", 2), EXIT_FAILURE);
+	// 	if (!(set_texture_buffer(game, txtr[i], i)))
+	// 		return (ft_putstr_fd("Error\nFailed to convert texture\n", 2), EXIT_FAILURE);
+	// 	mlx_delete_texture(txtr[i]);
+	// 	i++;
+	// }
+	game->txtr->no = mlx_load_png(game->data->no);
+	game->txtr->so = mlx_load_png(game->data->so);
+	game->txtr->we = mlx_load_png(game->data->we);
+	game->txtr->ea = mlx_load_png(game->data->ea);
+	if (!game->txtr->no || !game->txtr->so ||!game->txtr->we ||!game->txtr->ea)
+		return (ft_putstr_fd("Error\nFailed to load txtr\n", 2), EXIT_FAILURE);
+	set_texture_buffer(game, game->txtr->no, 0);
+	set_texture_buffer(game, game->txtr->so, 1);
+	set_texture_buffer(game, game->txtr->we, 2);
+	set_texture_buffer(game, game->txtr->ea, 3);
+	free_images(game);
 	return (EXIT_SUCCESS);
 }
 /*

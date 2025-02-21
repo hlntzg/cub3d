@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/18 12:58:52 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:08:19 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,18 @@ int	init_game(t_game *game)
 	game->txtr = ft_calloc(1, sizeof(t_txtr));
 	if (!game->txtr)
 		return (ft_putstr_fd("Error : calloc failed for game->txtr", 2), 1);
+	game->player = ft_calloc(1, sizeof(t_player));
+	if (!game->player)
+		return (ft_putstr_fd("Error : calloc failed for game->player", 2), 1);
+	game->ray = ft_calloc(1, sizeof(t_raycast));
+	if (!game->ray)
+		return (ft_putstr_fd("Error : calloc failed for game->ray", 2), 1);
+	game->ray->camera = 0;
+	game->ray->wall_x = 0;
+	game->ray->wx_distance = 0;
+	game->render = ft_calloc(1, sizeof(t_render));
+	if (!game->render)
+		return (ft_putstr_fd("Error : calloc failed for game->render", 2), 1);
 	/*game->img = ft_calloc(1, sizeof(t_img));
 	if (!game->img)
 		return (ft_putstr_fd("Error : calloc failed for game->img", 2), 1);*/

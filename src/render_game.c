@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 11:30:08 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:52:59 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	rendering_game(void *param)
 	t_game *game;
 	
 	game = (t_game *)param;
-	set_player(&game->data, &game->player);
 	move_player(game);
 	set_pixel_map(game);
 	raycasting(game);
@@ -30,14 +29,15 @@ void	raycasting(t_game *game)
 	int			x;
 
 	x = 0;
-	while (x < WIDTH)
+	ray = game->ray;
+	while (x <= WIDTH)
 	{
-		get_ray_direction(&game->player, ray, x);
-		get_delta_distance(&game->player, ray);
-		get_steps_distance(&game->player, ray);
+		get_ray_direction(game->player, ray, x);
+		get_delta_distance(game->player, ray);
+		get_steps_distance(game->player, ray);
 		get_wall_distance_and_height(game, ray);
-		get_wall_projection_pixels(&game->player, ray);
-		get_x_pixels_buffer(game, ray, x);
+		get_wall_projection_pixels(game->player, ray);
+		get_wall_pixels(game, ray, x);
 		x++;
 	}
 }
@@ -48,12 +48,12 @@ void	set_pixel_map(t_game *game)
 	int	y;
 
 	y = 0;
-	game->render->pixels = malloc(sizeof(int) * (HEIGHT + 1));
+	game->render->pixels = ft_calloc((HEIGHT + 1), sizeof(uint32_t *));
 	if (!game->render->pixels)
 		return ; // return NULL
 	while (y < HEIGHT)
 	{
-		game->render->pixels[y] = calloc(sizeof(int), WIDTH);
+		game->render->pixels[y] = ft_calloc(WIDTH, sizeof(uint32_t));
 		if (!game->render->pixels[y])
 			return ; // free array
 		y++;
@@ -70,6 +70,7 @@ int		get_orientation(t_raycast *ray)
 		return (WEST);
 	if (ray->direction.x > 0 && ray->boundary == 0)
 		return (EAST);
+	return (EXIT_FAILURE);
 }
 
 // converts wall_x strip into a texture coordinate
@@ -85,23 +86,36 @@ int	get_x_coordinate(t_raycast *ray, int txtr)
 		return (x);
 	if (txtr == SOUTH || txtr == WEST)
 		return (TXTR_PIXEL - x - 1);
+	return (EXIT_FAILURE);
 }
 
 // get the pixels of the x wall strip from the corresponding texture;
 // store them in the pixel_map
 void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 {
-	int		txtr;
-	int		txtr_x;
-	double	txtr_y;
-	double	txtr_scaling;
-	int		pixel_color;
+	int			txtr;
+	int			txtr_x;
+	double		txtr_y;
+	double		txtr_scaling;
+	uint32_t	pixel_color;
+	int			i;
 
 	ray->wall_x = ray->wall_x - (floor(ray->wall_x));
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
 	txtr_scaling = TXTR_PIXEL / ray->wx_height;
 	txtr_y = (ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2) * txtr_scaling;
+	game->render->pixels = ft_calloc(HEIGHT, sizeof(uint32_t *));
+	if (!game->render->pixels)
+		return (ft_putstr_fd("Memory allocation failed for pixels" , 2));
+	i = 0;
+	while (i < HEIGHT)
+	{
+		game->render->pixels[i] = ft_calloc(WIDTH, sizeof(uint32_t));
+		if (!game->render->pixels[i])
+			return (ft_putstr_fd("Memory allocation failed for pixels row", 2));
+		i++;
+	}
 	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
 	{
 		txtr_y += txtr_scaling;

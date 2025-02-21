@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 11:31:06 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:53:06 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_raycast
 	double		wx_distance;
 	int			wx_top_pixel;
 	int			wx_bottom_pixel;
-	int			wx_height;
+	double			wx_height;
 	int			boundary;
 	t_coord		map;
 	t_coord		step_dir;
@@ -116,8 +116,8 @@ typedef struct s_raycast
 
 typedef struct s_render
 {
-	int			*txtr_buf[4];
-	int			**pixels;
+	uint32_t	*txtr_buf[4];
+	uint32_t	**pixels;
 
 }	t_render;
 
@@ -200,6 +200,7 @@ int			get_texture(t_game *game);
 
 /* FREE */
 void		free_char_array(char **array);
+void		free_images(t_game *game);
 void		free_game(t_game *game);
 void		exit_game(t_game *game);
 

@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/20 17:08:32 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:30:08 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void	rendering_game(t_game *game)
+void	rendering_game(void *param)
 {
+	t_game *game;
+	
+	game = (t_game *)param;
 	set_player(&game->data, &game->player);
+	move_player(game);
 	set_pixel_map(game);
 	raycasting(game);
 	rendering_image(game); // WIP
@@ -27,7 +31,7 @@ void	raycasting(t_game *game)
 
 	x = 0;
 	while (x < WIDTH)
-	
+	{
 		get_ray_direction(&game->player, ray, x);
 		get_delta_distance(&game->player, ray);
 		get_steps_distance(&game->player, ray);
@@ -132,9 +136,9 @@ void	rendering_image(t_game *game)
 		{
 			if (game->render->pixels[y][x] > 0)
 				color = game->render->pixels[y][x];	
-			else if (y < WIN_HEIGHT / 2)
+			else if (y < HEIGHT / 2)
 				color = game->data->ceiling;
-			else if (y > WIN_HEIGHT / 2)
+			else if (y > HEIGHT / 2)
 				color = game->data->floor;
 			pixels[y * WIDTH + x] = color;
 			x++;

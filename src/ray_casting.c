@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/19 16:45:56 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:33:06 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	get_wall_distance_and_height(t_game *game, t_raycast *ray)
 		ray->wx_distance = ray->step.x - ray->delta.x;
 	if (ray->boundary == 1)
 		ray->wx_distance = ray->step.y - ray->delta.y;
-	ray->wx_height = (int)(HEIGHT / ray->distance_to_the_Wall);
+	ray->wx_height = (int)(HEIGHT / ray->wx_distance);
 }
 
 // pixel top-left (0,0), pixel bottom-right (WIDTH, HEIGHT)

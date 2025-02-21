@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:40:36 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/19 17:06:15 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:30:20 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,8 @@ void	game_events(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void	move_player(void *param)
+void	move_player(t_game *game)
 {
-	t_game *game;
-	
-	game = (t_game *)param;
 	if (game->player->move_left)
 		move_player_left(game);
 	else if (game->player->move_right)

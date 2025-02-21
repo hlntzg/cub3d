@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:28:52 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/20 17:04:30 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:32:33 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ uint32_t	store_color(int i, int j, mlx_texture_t *texture)
 	r = texture->pixels[index];
 	g = texture->pixels[index + 1];
 	b = texture->pixels[index + 2];
-	a = texture->pixels[index + 3]
+	a = texture->pixels[index + 3];
 	return ((a << 24) | (r << 16) | (g << 8) | b);
 }
 
@@ -34,8 +34,8 @@ int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 	int			i;
 	int			j;
 
-	pixels = calloc(sizeof(uint32_t) * texture->height * texture->width);
-	if (!pixel)
+	pixels = ft_calloc(texture->height * texture->width, sizeof(uint32_t));
+	if (!pixels)
 		return (EXIT_FAILURE);
 	while (i < texture->height)
 	{
@@ -53,7 +53,7 @@ int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 int	get_texture(t_game *game)
 {
 	mlx_texture_t	*txtr[4];
-	char			*txtr_path[4];
+	char			*path[4];
 	int				i;
 
 	path[0] = game->txtr->no;

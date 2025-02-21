@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/20 11:29:28 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/21 11:31:06 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_game
 }	t_game;
 
 /* MAIN */
-void		rendering_game(t_game *game);
+void		rendering_game(void *param);
 
 /* RAYCASTING */
 void		raycasting(t_game *game);
@@ -153,7 +153,7 @@ int			init_game(t_game *game);
 
 /* GAME */
 void		game_events(mlx_key_data_t keydata, void *param);
-void		move_player(void *param);
+void		move_player(t_game *game);
 void		set_player(t_game *game, t_player *player);
 
 /* MOVE_PLAYER */

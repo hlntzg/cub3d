@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 13:50:12 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:53:08 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,9 @@ void	get_wall_distance_and_height(t_game *game, t_raycast *ray)
 			ray->step.y += ray->delta.y;
 			ray->map.y += ray->step_dir.y;
 		}
+		// if (ray->map.x < 0 || ray->map.x >= game->data->columns || ray->map.y < 0
+		// 	|| ray->map.y >= game->data->lines)
+		// 	break ;
 		if (game->data->map[ray->map.y][ray->map.x] == '1')
 			break ;
 	}
@@ -108,4 +111,5 @@ void	get_wall_projection_pixels(t_player *player, t_raycast *ray)
 		ray->wall_x = ray->direction.y * ray->wx_distance + player->position.y;
 	if (ray->boundary == 1)
 		ray->wall_x = ray->direction.x * ray->wx_distance + player->position.x;
+	ray->wall_x -= floor(ray->wall_x);
 }

@@ -6,11 +6,28 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 11:57:28 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:15:02 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+// static void	free_pixels(t_game *game)
+// {
+// 	int i;
+
+// 	if (!game->render->pixels)
+// 		return;
+
+// 	i = 0;
+// 	while (i < HEIGHT)
+// 	{
+// 		free(game->render->pixels[i]);
+// 		i++;
+// 	}
+// 	free(game->render->pixels);
+// 	game->render->pixels = NULL;
+// }
 
 void	free_char_array(char **array)
 {
@@ -73,6 +90,8 @@ void	free_game(t_game *game)
 		free(game->ray);
 	if (game->render)
 		free(game->render);
+	// if(game->render->pixels)
+	// 	free_pixels(game);
 }
 
 void	exit_game(t_game *game)

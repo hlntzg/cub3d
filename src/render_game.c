@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 13:52:59 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:52:22 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	raycasting(t_game *game)
 
 	x = 0;
 	ray = game->ray;
-	while (x <= WIDTH)
+	while (x < WIDTH)
 	{
 		get_ray_direction(game->player, ray, x);
 		get_delta_distance(game->player, ray);
@@ -98,24 +98,11 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 	double		txtr_y;
 	double		txtr_scaling;
 	uint32_t	pixel_color;
-	int			i;
 
-	ray->wall_x = ray->wall_x - (floor(ray->wall_x));
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
 	txtr_scaling = TXTR_PIXEL / ray->wx_height;
 	txtr_y = (ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2) * txtr_scaling;
-	game->render->pixels = ft_calloc(HEIGHT, sizeof(uint32_t *));
-	if (!game->render->pixels)
-		return (ft_putstr_fd("Memory allocation failed for pixels" , 2));
-	i = 0;
-	while (i < HEIGHT)
-	{
-		game->render->pixels[i] = ft_calloc(WIDTH, sizeof(uint32_t));
-		if (!game->render->pixels[i])
-			return (ft_putstr_fd("Memory allocation failed for pixels row", 2));
-		i++;
-	}
 	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
 	{
 		txtr_y += txtr_scaling;
@@ -156,8 +143,7 @@ void	rendering_image(t_game *game)
 				color = game->data->floor;
 			pixels[y * WIDTH + x] = color;
 			x++;
-		}
-//		mlx_put_pixel(img, x, y, color);	
+		}	
 		y++;
 	}
 	mlx_image_to_window(game->mlx, img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:42:55 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/19 16:46:39 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:11:53 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ static uint32_t	extract_rgb(char **map, int i, int j, uint32_t rbg_type)
 		return (free_char_array(rgb_split), '\0');
 	rbg_type = create_color(ft_atoi(rgb_split[0]), \
 			ft_atoi(rgb_split[1]), ft_atoi(rgb_split[2]));
+	//printf("color %u\n", rbg_type);
 	free_char_array(rgb_split);
+
+	printf("color %u\n", rbg_type);
 	return (rbg_type);
 }
 
-static int	process_rgb(char **map, uint32_t rbg_type, char a)
+static int	process_rgb(char **map, uint32_t *rbg_type, char a)
 {
 	int	i;
 	int	j;
@@ -51,22 +54,22 @@ static int	process_rgb(char **map, uint32_t rbg_type, char a)
 		if (map[i][j] == a && map[i][j + 1] == ' ')
 		{
 			j++;
-			if (is_duplicate_rgb(rbg_type) == EXIT_FAILURE)
+			if (is_duplicate_rgb(*rbg_type) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
-			rbg_type = extract_rgb(map, i, j, rbg_type);
+			*rbg_type = extract_rgb(map, i, j, *rbg_type);
 		}
 		i++;
 	}
-	if (rbg_type == '\0')
+	if (*rbg_type == '\0')
 		return (ft_putstr_fd("Error\nAt least 1 rgb not found.\n", 2), 1);
 	return (EXIT_SUCCESS);
 }
 
 int	validate_rgb(char **map, t_game *game)
 {
-	if (process_rgb(map, game->data->floor, 'F') == EXIT_FAILURE)
+	if (process_rgb(map, &game->data->floor, 'F') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (process_rgb(map, game->data->ceiling, 'C') == EXIT_FAILURE)
+	if (process_rgb(map, &game->data->ceiling, 'C') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

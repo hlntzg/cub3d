@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 12:53:06 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:21:35 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_raycast
 	double		wx_distance;
 	int			wx_top_pixel;
 	int			wx_bottom_pixel;
-	double			wx_height;
+	double		wx_height;
 	int			boundary;
 	t_coord		map;
 	t_coord		step_dir;

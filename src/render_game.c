@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 16:32:30 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:47:10 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rendering_game(void *param)
 	game = (t_game *)param;
 	move_player(game);
 	raycasting(game);
-	rendering_image(game); // WIP
+	rendering_image(game);
 }
 
 void	raycasting(t_game *game)
@@ -37,6 +37,7 @@ void	raycasting(t_game *game)
 		get_wall_distance_and_height(game, ray);
 		get_wall_projection_pixels(game->player, ray);
 		get_wall_pixels(game, ray, x);
+//		sleep(5);
 		x++;
 	}
 }

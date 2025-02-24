@@ -21,8 +21,8 @@
 # include <errno.h>
 # include <string.h>
 
-# define WIDTH		1920
-# define HEIGHT		1080
+# define WIDTH		640
+# define HEIGHT		360
 # define TXTR_PIXEL	64
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.5
@@ -105,7 +105,7 @@ typedef struct s_raycast
 	double		wx_distance;
 	int			wx_top_pixel;
 	int			wx_bottom_pixel;
-	double		wx_height;
+	int			wx_height;
 	int			boundary;
 	t_coord		map;
 	t_coord		step_dir;

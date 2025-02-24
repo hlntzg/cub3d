@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 14:53:08 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:46:57 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,27 @@ void	get_ray_direction(t_player *player, t_raycast *ray, int x)
 	//printf("cam %f\n", ray->camera);
 	ray->direction.x = (player->d.x + player->p.x) * ray->camera;
 	ray->direction.y = (player->d.y + player->p.y) * ray->camera;
-	//printf("x %f\n", ray->direction.x);
-	//printf("y %f\n", ray->direction.y);
+	//printf("dir x %f\n", ray->direction.x);
+	//printf("dir y %f\n", ray->direction.y);
 }
 
 void	get_delta_distance(t_player *player, t_raycast *ray)
 {
 	ray->delta.x = fabs(1 / ray->direction.x);
 	ray->delta.y = fabs(1 / ray->direction.y);
-	//printf("delta x %f\n", ray->delta.x);
-	//printf("delta y %f\n", ray->delta.y);
+	// printf("delta x %f\n", ray->delta.x);
+	// printf("delta y %f\n", ray->delta.y);
 	ray->map.x = (int)player->position.x;
 	ray->map.y = (int)player->position.y;
+//	printf("map x %d\n", ray->map.x);
+//	printf("map y %d\n", ray->map.y);
 }
 
 // calculates the initial steps and distances needed for raycasting in both the
 // x and y directions, based on the player's position and the ray's direction
 void	get_steps_distance(t_player *player, t_raycast *ray)
 {
-	if (ray->direction.x > 0)
+	if (ray->direction.x >= 0)
 	{
 		ray->step_dir.x = 1;
 		ray->step.x = (ray->map.x + 1.0 - player->position.x) * ray->delta.x;
@@ -46,7 +48,7 @@ void	get_steps_distance(t_player *player, t_raycast *ray)
 		ray->step_dir.x = -1;
 		ray->step.x = (player->position.x - ray->map.x) * ray->delta.x;
 	}
-	if (ray->direction.y > 0)
+	if (ray->direction.y >= 0)
 	{
 		ray->step_dir.y = 1;
 		ray->step.y = (ray->map.y + 1.0 - player->position.y) * ray->delta.y;
@@ -56,8 +58,8 @@ void	get_steps_distance(t_player *player, t_raycast *ray)
 		ray->step_dir.y = -1;
 		ray->step.y = (player->position.y - ray->map.y) * ray->delta.y;
 	}
-	//printf("step x %f\n", ray->step.x);
-	//printf("step y %f\n", ray->step.y);
+//	printf("step x %f\n", ray->step.x);
+//	printf("step y %f\n", ray->step.y);
 }
 
 // step tracks the distance to the next grid line, so
@@ -89,8 +91,9 @@ void	get_wall_distance_and_height(t_game *game, t_raycast *ray)
 	if (ray->boundary == 1)
 		ray->wx_distance = ray->step.y - ray->delta.y;
 	//printf("wx dist %f\n", ray->wx_distance);
+	//sleep(5);
 	ray->wx_height = (int)(HEIGHT / ray->wx_distance); //-((WIDTH / 2) / tan(30)) / ray->wx_distance;
-	//printf("wx height %f\n", ray->wx_height);
+	//printf("wx height %d\n", ray->wx_height);
 }
 
 // pixel top-left (0,0), pixel bottom-right (WIDTH, HEIGHT)

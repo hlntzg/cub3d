@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:42:55 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 15:21:54 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:27:44 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static uint32_t	extract_rgb(char **map, int i, int j, uint32_t rbg_type)
 	if (validate_rgb_split(rgb_split) == 1)
 		return (free_char_array(rgb_split), '\0');
 	rbg_type = create_color(ft_atoi(rgb_split[0]), \
-			ft_atoi(rgb_split[1]), ft_atoi(rgb_split[2]));
+			ft_atoi(rgb_split[1]), ft_atoi(rgb_split[2]), 255);
 	free_char_array(rgb_split);
 	return (rbg_type);
 }

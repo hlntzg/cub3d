@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/25 16:27:49 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:23:57 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	raycasting(t_game *game)
 int		get_orientation(t_raycast *ray)
 {	
 	if (ray->direction.y < 0 && ray->boundary == 1)
-		return (WEST);
+		return (NORTH);
 	if (ray->direction.y > 0 && ray->boundary == 1)
 		return (SOUTH);
 	if (ray->direction.x < 0 && ray->boundary == 0)
-		return (NORTH);
+		return (WEST);
 	if (ray->direction.x > 0 && ray->boundary == 0)
 		return (EAST);
 	return (EXIT_FAILURE);

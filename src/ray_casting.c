@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/25 16:32:27 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:44:15 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	get_wall_projection_pixels(t_player *player, t_raycast *ray)
 	if (ray->wx_top_pixel < 0)
 		ray->wx_top_pixel = 0;
 	if (ray->wx_bottom_pixel > HEIGHT)
-		ray->wx_bottom_pixel = HEIGHT;// - 1;
+		ray->wx_bottom_pixel = HEIGHT - 1;
 	if (ray->boundary == 0)
 		ray->wall_x = ray->direction.y * ray->wx_distance + player->position.y;
 	if (ray->boundary == 1)

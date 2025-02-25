@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:28:52 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 16:37:55 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:37:55 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ uint32_t	store_color(int i, int j, mlx_texture_t *texture)
 	g = texture->pixels[index + 1];
 	b = texture->pixels[index + 2];
 	a = texture->pixels[index + 3];
-	return ((a << 24) | (r << 16) | (g << 8) | b);
+	return (create_color((int)a, (int)b, (int)g, (int)r));
 }
 
 int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)

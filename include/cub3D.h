@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 16:50:57 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:27:47 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int			validate_rgb(char **map, t_game *game);
 /* UTILS_VALIDATE */
 char		*extract(char **map, int i, int j, char *extract);
 int			is_duplicate_rgb(uint32_t rbg_type);
-uint32_t	create_color(int r, int g, int b);
+uint32_t	create_color(int r, int g, int b, int a);
 int			check_rgb(char *rgb);
 int			validate_rgb_split(char **rgb_split);
 

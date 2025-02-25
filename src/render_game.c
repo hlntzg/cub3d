@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/25 16:14:27 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:27:49 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
 	txtr_scaling = TXTR_PIXEL / ray->wx_height;
-	txtr_y = (ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2) * txtr_scaling;
+	txtr_y = (ray->wx_top_pixel - (HEIGHT / 2) + (ray->wx_height / 2)) * txtr_scaling;
 	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
 	{
 		txtr_y += txtr_scaling;

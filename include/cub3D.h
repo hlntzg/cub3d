@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 16:15:39 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:50:57 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,6 @@ typedef struct s_txtr
 	mlx_texture_t	*ce;
 	mlx_texture_t	*fl;
 }	t_txtr;
-
-/*typedef struct s_img
-{
-	mlx_image_t	*no;
-	mlx_image_t	*ea;
-	mlx_image_t	*so;
-	mlx_image_t	*we;
-	mlx_image_t	*ce;
-	mlx_image_t	*fl;
-}	t_img;*/
 
 typedef struct s_data
 {
@@ -126,8 +116,7 @@ typedef struct s_game
 	mlx_t		*mlx;
 	t_data		*data;
 	t_txtr		*txtr;
-	mlx_image_t	*img; //
-	//t_img		*img;
+	mlx_image_t	*img;
 	t_player	*player;
 	t_raycast	*ray;
 	t_render	*render;
@@ -200,7 +189,7 @@ int			get_texture(t_game *game);
 
 /* FREE */
 void		free_char_array(char **array);
-void		free_images(t_game *game);
+void		free_texture(t_game *game);
 void		free_game(t_game *game);
 void		exit_game(t_game *game);
 

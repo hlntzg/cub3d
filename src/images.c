@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:28:52 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 15:47:42 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:37:55 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,60 +54,20 @@ int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 
 int	get_texture(t_game *game)
 {
-	//mlx_texture_t	*txtr[4];
-	//char			*path[4];
-	//int				i;
-
-	// path[0] = (char *)game->txtr->no;
-	// path[1] = (char *)game->txtr->so;
-	// path[2] = (char *)game->txtr->we;
-	// path[3] = (char *)game->txtr->ea;
-	// i = 0;
-	// while (i < 4)
-	// {
-	// 	// txtr[i] = mlx_load_png(path[i]);
-	// 	// if (!txtr[i])
-	// 	// 	return (ft_putstr_fd("Error\nFailed to load texture\n", 2), EXIT_FAILURE);
-	// 	if (!(set_texture_buffer(game, txtr[i], i)))
-	// 		return (ft_putstr_fd("Error\nFailed to convert texture\n", 2), EXIT_FAILURE);
-	// 	mlx_delete_texture(txtr[i]);
-	// 	i++;
-	// }
 	game->txtr->no = mlx_load_png(game->data->no);
 	game->txtr->so = mlx_load_png(game->data->so);
 	game->txtr->we = mlx_load_png(game->data->we);
 	game->txtr->ea = mlx_load_png(game->data->ea);
 	if (!game->txtr->no || !game->txtr->so ||!game->txtr->we ||!game->txtr->ea)
 		return (ft_putstr_fd("Error\nFailed to load txtr\n", 2), EXIT_FAILURE);
-	set_texture_buffer(game, game->txtr->no, 0);
-	set_texture_buffer(game, game->txtr->so, 1);
-	set_texture_buffer(game, game->txtr->ea, 2);
-	set_texture_buffer(game, game->txtr->we, 3);
-	free_images(game);
+	if (set_texture_buffer(game, game->txtr->no, 0) == 1)
+		return (EXIT_FAILURE);
+	if (set_texture_buffer(game, game->txtr->so, 1) == 1)
+		return (EXIT_FAILURE);
+	if (set_texture_buffer(game, game->txtr->ea, 2) == 1)
+		return (EXIT_FAILURE);
+	if (set_texture_buffer(game, game->txtr->we, 3) == 1)
+		return (EXIT_FAILURE);
+	free_texture(game);
 	return (EXIT_SUCCESS);
 }
-/*
-int	get_texture(t_game *game)
-{
-	game->txtr->no = mlx_load_png(game->data->no);
-	game->txtr->so = mlx_load_png(game->data->so);
-	game->txtr->we = mlx_load_png(game->data->we);
-	game->txtr->ea = mlx_load_png(game->data->ea);
-	if (!game->txtr->no || !game->txtr->so ||!game->txtr->we ||!game->txtr->ea)
-		return (ft_putstr_fd("Error\nFailed to load txtr\n", 2), EXIT_FAILURE);
-	game->img->no = mlx_texture_to_image(game->mlx, game->txtr->no);
-	game->img->so = mlx_texture_to_image(game->mlx, game->txtr->so);
-	game->img->we = mlx_texture_to_image(game->mlx, game->txtr->we);
-	game->img->ea = mlx_texture_to_image(game->mlx, game->txtr->ea);
-	if (!game->img->no || !game->img->so ||!game->img->we ||!game->img->ea)
-		return (ft_putstr_fd("Error\nFailed to load image\n", 2), EXIT_FAILURE);
-	if (game->txtr->no)
-		mlx_delete_texture(game->txtr->no);
-	if (game->txtr->so)
-		mlx_delete_texture(game->txtr->so);
-	if (game->txtr->we)
-		mlx_delete_texture(game->txtr->we);
-	if (game->txtr->ea)
-		mlx_delete_texture(game->txtr->ea);
-	return (EXIT_SUCCESS);
-}*/

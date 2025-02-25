@@ -81,8 +81,8 @@ int	get_texture(t_game *game)
 		return (ft_putstr_fd("Error\nFailed to load txtr\n", 2), EXIT_FAILURE);
 	set_texture_buffer(game, game->txtr->no, 0);
 	set_texture_buffer(game, game->txtr->so, 1);
-	set_texture_buffer(game, game->txtr->we, 2);
-	set_texture_buffer(game, game->txtr->ea, 3);
+	set_texture_buffer(game, game->txtr->ea, 2);
+	set_texture_buffer(game, game->txtr->we, 3);
 	free_images(game);
 	return (EXIT_SUCCESS);
 }

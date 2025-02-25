@@ -37,7 +37,7 @@ void	raycasting(t_game *game)
 		get_wall_distance_and_height(game, ray);
 		get_wall_projection_pixels(game->player, ray);
 		get_wall_pixels(game, ray, x);
-//		sleep(5);
+		//sleep(1);
 		x++;
 	}
 }
@@ -89,7 +89,7 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 	{
 		txtr_y += txtr_scaling;
 		pixel_color = (game->render->txtr_buf)[txtr][(TXTR_PIXEL * ((int)txtr_y & (TXTR_PIXEL - 1))) + txtr_x];
-		// color adjustments ?
+		// color adjustments ? 
 		if (pixel_color >= 0)
 			game->render->pixels[ray->wx_top_pixel][x] = pixel_color;
 		ray->wx_top_pixel++;

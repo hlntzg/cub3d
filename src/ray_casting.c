@@ -16,8 +16,10 @@ void	get_ray_direction(t_player *player, t_raycast *ray, int x)
 {
 	ray->camera = 2 * x / (double)WIDTH - 1;
 	//printf("cam %f\n", ray->camera);
-	ray->direction.x = (player->d.x + player->p.x) * ray->camera;
-	ray->direction.y = (player->d.y + player->p.y) * ray->camera;
+	//printf("player dx = %f :: player px = %f\n", player->d.x, player->p.x);
+	//printf("player dy = %f :: player py = %f\n", player->d.y, player->p.y);
+	ray->direction.x = player->d.x + player->p.x * ray->camera;
+	ray->direction.y = player->d.y + player->p.y * ray->camera;
 	//printf("dir x %f\n", ray->direction.x);
 	//printf("dir y %f\n", ray->direction.y);
 }

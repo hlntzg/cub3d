@@ -6,17 +6,38 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/24 12:47:10 by hutzig           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:36:41 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+void	clear_pixel_buffer(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			game->render->pixels[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+}
 
 void	rendering_game(void *param)
 {
 	t_game *game;
 	
 	game = (t_game *)param;
+	if (game->img)
+		mlx_delete_image(game->mlx, game->img);
+	clear_pixel_buffer(game);
 	move_player(game);
 	raycasting(game);
 	rendering_image(game);
@@ -100,17 +121,17 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 // check if the pixel is in wall, floor or ceiling position
 void	rendering_image(t_game *game)
 {
-	mlx_image_t	*img;
+	//mlx_image_t	*img;
 	uint32_t	color;
 	uint32_t	*pixels;
 	uint32_t	x;
 	uint32_t	y;
 	
 	color = 0;
-	img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!img)
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->img)
 		return ;
-	pixels = (uint32_t *)img->pixels;
+	pixels = (uint32_t *)game->img->pixels;
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -128,5 +149,5 @@ void	rendering_image(t_game *game)
 		}	
 		y++;
 	}
-	mlx_image_to_window(game->mlx, img, 0, 0);
+	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }

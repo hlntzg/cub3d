@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 16:28:19 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:39 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int	init_game(t_game *game)
 			return (ft_putstr_fd("Memory allocation failed for pixels row", 2), 1);
 		i++;
 	}
+	game->img = NULL;
 	return (EXIT_SUCCESS);
 }

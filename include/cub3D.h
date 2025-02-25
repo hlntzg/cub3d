@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/21 16:32:34 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:30 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct s_game
 	mlx_t		*mlx;
 	t_data		*data;
 	t_txtr		*txtr;
+	mlx_image_t	*img; //
 	//t_img		*img;
 	t_player	*player;
 	t_raycast	*ray;

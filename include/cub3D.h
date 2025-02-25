@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 15:34:30 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:15:39 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define HEIGHT		360
 # define TXTR_PIXEL	64
 # define MOVE_SPEED	0.1
-# define ROT_SPEED	0.5
+# define ROT_SPEED	0.1
 
 typedef enum s_orientation
 {

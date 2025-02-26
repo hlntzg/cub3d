@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 14:29:02 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:33:05 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	free_pixels(uint32_t **array)
 {
-	int i;
+	int	i;
 
 	if (!array)
-		return;
+		return ;
 	i = 0;
 	while (array[i])
 	{
@@ -78,7 +78,7 @@ void	free_game(t_game *game)
 	int	i;
 
 	free_data(game->data);
-	if(game->render->pixels)
+	if (game->render->pixels)
 		free_pixels(game->render->pixels);
 	i = 0;
 	while (i < 4)
@@ -93,7 +93,7 @@ void	free_game(t_game *game)
 		free(game->ray);
 	if (game->render)
 		free(game->render);
-	if(game->txtr)
+	if (game->txtr)
 		free_texture(game);
 }
 

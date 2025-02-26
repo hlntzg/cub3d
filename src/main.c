@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:41:10 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 13:54:20 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:10:55 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	resize_window(int width, int height, void *param)
 {
-	int	i;
+	int		i;
 	t_game	*game;
 
 	game = (t_game *)param;
-    game->win_w = width;
-    game->win_h = height;
-	if(game->render->pixels)
+	game->win_w = width;
+	game->win_h = height;
+	if (game->render->pixels)
 		free_pixels(game->render->pixels);
-    game->render->pixels = ft_calloc(game->win_h + 1, sizeof(uint32_t *));
+	game->render->pixels = ft_calloc(game->win_h + 1, sizeof(uint32_t *));
 	if (!game->render->pixels)
-		return (ft_putstr_fd("Memory allocation failed for pixels" , 2));
+		return (ft_putstr_fd("Memory allocation failed for pixels", 2));
 	i = 0;
 	while (i < game->win_h)
 	{
@@ -33,7 +33,7 @@ void	resize_window(int width, int height, void *param)
 			return (ft_putstr_fd("Memory allocation failed for pixels row", 2));
 		i++;
 	}
-    return ;
+	return ;
 }
 
 int	start_game(t_game *game)
@@ -45,10 +45,10 @@ int	start_game(t_game *game)
 		return (EXIT_FAILURE);
 	set_player(game, game->player);
 	mlx_key_hook(game->mlx, &game_events, game);
+	mlx_key_hook(game->mlx, &game_events, game);
 	mlx_loop_hook(game->mlx, &rendering_game, game);
 	return (EXIT_SUCCESS);
 }
-
 
 int	main(int argc, char **argv)
 {

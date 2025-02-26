@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:11:53 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/19 13:28:38 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:15:31 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ void	make_map_rectangular(t_data *data)
 		}
 		i++;
 	}
-	printf("Map copied:\n");
-	for (int k = 0; data->map[k] != NULL; k++)
-		printf("%s\n", data->map[k]);
 }
 
 int	validate_cub(char *map_name, t_game *game)

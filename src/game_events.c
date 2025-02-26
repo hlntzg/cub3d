@@ -6,16 +6,29 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:40:36 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/21 11:30:20 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:15:19 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
+static void	game_events_release(mlx_key_data_t keydata, t_game *game)
+{
+	if (keydata.action == MLX_RELEASE)
+	{
+		game->player->move_left = false;
+		game->player->move_right = false;
+		game->player->move_backward = false;
+		game->player->move_forward = false;
+		game->player->rotate_left = false;
+		game->player->rotate_right = false;
+	}
+}
+
 void	game_events(mlx_key_data_t keydata, void *param)
 {
-	t_game *game;
-	
+	t_game	*game;
+
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit_game(game);
@@ -34,15 +47,7 @@ void	game_events(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_RIGHT)
 			game->player->rotate_right = true;
 	}
-	if (keydata.action == MLX_RELEASE)
-	{
-		game->player->move_left = false;
-		game->player->move_right = false;
-		game->player->move_backward = false;
-		game->player->move_forward = false;
-		game->player->rotate_left = false;
-		game->player->rotate_right = false;
-	}
+	game_events_release(keydata, game);
 }
 
 void	move_player(t_game *game)

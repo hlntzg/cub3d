@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 13:52:50 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:29:02 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,26 @@ void	free_texture(t_game *game)
 
 void	free_game(t_game *game)
 {
+	int	i;
+
 	free_data(game->data);
-	//if(game->render->txtr_buf)
-	//free_pixels(game->render->txtr_buf);
 	if(game->render->pixels)
 		free_pixels(game->render->pixels);
+	i = 0;
+	while (i < 4)
+	{
+		if (game->render->txtr_buf[i])
+			free(game->render->txtr_buf[i]);
+		i++;
+	}
 	if (game->player)
 		free(game->player);
 	if (game->ray)
 		free(game->ray);
 	if (game->render)
 		free(game->render);
+	if(game->txtr)
+		free_texture(game);
 }
 
 void	exit_game(t_game *game)

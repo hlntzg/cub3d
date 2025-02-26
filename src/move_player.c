@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:47:33 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 10:41:55 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:10:30 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	move_player_forward(t_game *game)
 	t_coordd	*p;
 
 	p = &game->player->position;
-
 	new_x = p->x + game->player->d.x * MOVE_SPEED;
 	new_y = p->y + game->player->d.y * MOVE_SPEED;
 	if (game->data->map[(int)(new_y + EPS)][(int)(new_x + EPS)] != '1'
@@ -80,7 +79,6 @@ void	move_player_left(t_game *game)
 	t_coordd	*p;
 
 	p = &game->player->position;
-
 	new_x = p->x + game->player->d.y * MOVE_SPEED;
 	new_y = p->y - game->player->d.x * MOVE_SPEED;
 	if (game->data->map[(int)(new_y + EPS)][(int)(new_x + EPS)] != '1'

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/25 17:23:57 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:16:32 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	clear_pixel_buffer(t_game *game)
 
 void	rendering_game(void *param)
 {
-	t_game *game;
-	
+	t_game	*game;
+
 	game = (t_game *)param;
 	if (game->img)
 		mlx_delete_image(game->mlx, game->img);
@@ -58,12 +58,11 @@ void	raycasting(t_game *game)
 		get_wall_distance_and_height(game, ray);
 		get_wall_projection_pixels(game->player, ray);
 		get_wall_pixels(game, ray, x);
-		//sleep(1);
 		x++;
 	}
 }
 
-int		get_orientation(t_raycast *ray)
+int	get_orientation(t_raycast *ray)
 {	
 	if (ray->direction.y < 0 && ray->boundary == 1)
 		return (NORTH);
@@ -78,8 +77,8 @@ int		get_orientation(t_raycast *ray)
 
 // converts wall_x strip into a texture coordinate
 // obs: when the wall faces SOUTH or WEST, the ray intersects from the opposite
-// side of how the texture is naturally laid out. After the adjustment, the leftmost
-// part of the texture maps correctly to the left edge of the wall
+// side of how the texture is naturally laid out. After the adjustment, the 
+// leftmost part of the texture maps correctly to the left edge of the wall
 int	get_x_coordinate(t_raycast *ray, int txtr)
 {
 	int	x;
@@ -92,8 +91,27 @@ int	get_x_coordinate(t_raycast *ray, int txtr)
 	return (EXIT_FAILURE);
 }
 
+// Reduce brightness of the color by factor (e.g., 0.6 = 60% brightness)
+uint32_t	apply_shading(uint32_t color, double factor)
+{
+	uint8_t	a;
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+
+	a = (color >> 24) & 0xFF;
+	r = ((color >> 16) & 0xFF) * factor;
+	g = ((color >> 8) & 0xFF) * factor;
+	b = (color & 0xFF) * factor;
+	return ((a << 24) | (r << 16) | (g << 8) | b);
+}
+
 // get the pixels of the x wall strip from the corresponding texture;
 // store them in the pixel_map
+//
+// color adjustments ? for example, darken by 40% with apply_shadding
+// (only for ^2) first approach of pixel_color = (game->render->txtr_buf)
+//[txtr][(TXTR_PIXEL * ((int)txtr_y & (TXTR_PIXEL - 1))) + txtr_x];
 void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 {
 	int			txtr;
@@ -104,14 +122,17 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
-	txtr_scaling = TXTR_PIXEL / ray->wx_height;
-	txtr_y = (ray->wx_top_pixel - (HEIGHT / 2) + (ray->wx_height / 2)) * txtr_scaling;
+	txtr_scaling = (double) TXTR_PIXEL / fmax(ray->wx_height, 1.0);
+	txtr_y = (double)(ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2)
+		* txtr_scaling;
 	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
 	{
 		txtr_y += txtr_scaling;
-		pixel_color = (game->render->txtr_buf)[txtr][(TXTR_PIXEL * ((int)txtr_y & (TXTR_PIXEL - 1))) + txtr_x];
-		// color adjustments ? 
-		if (pixel_color >= 0)
+		pixel_color = (game->render->txtr_buf)[txtr]
+		[(TXTR_PIXEL * ((int)txtr_y % TXTR_PIXEL)) + txtr_x];
+		if (txtr == NORTH || txtr == SOUTH)
+			pixel_color = apply_shading(pixel_color, 0.6);
+		if (pixel_color > 0)
 			game->render->pixels[ray->wx_top_pixel][x] = pixel_color;
 		ray->wx_top_pixel++;
 	}
@@ -121,12 +142,11 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 // check if the pixel is in wall, floor or ceiling position
 void	rendering_image(t_game *game)
 {
-	//mlx_image_t	*img;
 	uint32_t	color;
 	uint32_t	*pixels;
 	uint32_t	x;
 	uint32_t	y;
-	
+
 	color = 0;
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->img)

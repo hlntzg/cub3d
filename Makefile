@@ -6,7 +6,7 @@
 #    By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/22 15:11:19 by jmouette          #+#    #+#              #
-#    Updated: 2025/02/26 14:44:52 by jmouette         ###   ########.fr        #
+#    Updated: 2025/02/26 16:44:05 by jmouette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= cub3D
 
 CC				= cc
 
-CFLAGS			= -Wextra -Wall -Werror -g -Wunreachable-code -Ofast -fsanitize=address
+CFLAGS			= -Wextra -Wall -Werror #-g -Wunreachable-code -Ofast -fsanitize=address
 MLX_FLAGS		= -lglfw -ldl -pthread -lm
 
 LIBFT			= ./libft/libft.a

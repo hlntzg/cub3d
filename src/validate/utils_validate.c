@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:53:36 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 17:27:14 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:29:34 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_duplicate_rgb(uint32_t rbg_type)
 
 uint32_t	create_color(int r, int g, int b, int a)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return (a << 24 | b << 16 | g << 8 | r);
 }
 
 int	check_rgb(char *rgb)

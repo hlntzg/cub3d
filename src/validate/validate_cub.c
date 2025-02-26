@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:11:53 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 14:15:31 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:32:41 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,35 @@ void	make_map_rectangular(t_data *data)
 		}
 		i++;
 	}
+}
+
+static int	read_copy_map(char **cub_content, t_data *data)
+{
+	int	i;
+	int	map_start;
+
+	i = 0;
+	map_start = -1;
+	while (cub_content[i] != NULL)
+	{
+		if (is_map(cub_content[i]) == 0)
+		{
+			map_start = i;
+			while (cub_content[i] != NULL && is_map(cub_content[i]) == 0)
+				i++;
+			while (cub_content[i] != NULL)
+			{
+				if (is_map(cub_content[i]) != 2 && !empty_lines(cub_content[i]))
+					return (printf("Error\nMap is not at the end.\n"), 1);
+				i++;
+			}
+			break ;
+		}
+		i++;
+	}
+	if (copy_map(data, cub_content, map_start, i) == 1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	validate_cub(char *map_name, t_game *game)

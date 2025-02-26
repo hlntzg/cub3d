@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 14:53:34 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/18 16:13:25 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:32:42 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	compute_map_size(t_data *data, char **cub_content, int start, int i)
 	data->map_size.x = max_width;
 }
 
-static int	is_map(char *s)
+int	is_map(char *s)
 {
 	int	i;
 
@@ -85,7 +85,7 @@ static int	fill_map(t_data *data, char **cub_content, int map_start, int i)
 	return (0);
 }
 
-static int	copy_map(t_data *data, char **cub_content, int map_start, int i)
+int	copy_map(t_data *data, char **cub_content, int map_start, int i)
 {
 	if (map_start == -1)
 		return (ft_putstr_fd("Error\nNo map found.\n", 2), EXIT_FAILURE);
@@ -98,31 +98,18 @@ static int	copy_map(t_data *data, char **cub_content, int map_start, int i)
 	return (EXIT_SUCCESS);
 }
 
-int	read_copy_map(char **cub_content, t_data *data)
+int	empty_lines(char *line)
 {
-	int	i;
-	int	map_start;
+	int	j;
 
-	i = 0;
-	map_start = -1;
-	while (cub_content[i] != NULL)
+	j = 0;
+	while (line[j] != '\0')
 	{
-		if (is_map(cub_content[i]) == 0)
-		{
-			map_start = i;
-			while (cub_content[i] != NULL && is_map(cub_content[i]) == 0)
-				i++;
-			while (cub_content[i] != NULL)
-			{
-				if (is_map(cub_content[i]) != 2)
-					return (printf("Error\nMap is not at the end.\n"), 1);
-				i++;
-			}
-			break ;
-		}
-		i++;
+		if (line[j] != ' ' && line[j] != '\t')
+			return (0);
+		j++;
 	}
-	if (copy_map(data, cub_content, map_start, i) == 1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (1);
 }
+
+

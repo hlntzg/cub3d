@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 13:53:00 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:35:42 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <errno.h>
 # include <string.h>
 
-# define WIDTH		640
-# define HEIGHT		360
+# define WIDTH		1000
+# define HEIGHT		600
 # define TEXTURE	64
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.1
@@ -167,7 +167,9 @@ int			validate_cub(char *map_name, t_game *game);
 int			validate_extension(char *map_name, char a, char b, char c);
 
 /* MAP */
-int			read_copy_map(char **cub_content, t_data *data);
+int			is_map(char *s);
+int			empty_lines(char *line);
+int			copy_map(t_data *data, char **cub_content, int map_start, int i);
 
 /* VALIDATE_MAP */
 int			valid_chars(t_data *data);

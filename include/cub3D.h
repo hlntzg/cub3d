@@ -23,7 +23,7 @@
 
 # define WIDTH		640
 # define HEIGHT		360
-# define TXTR_PIXEL	64
+# define TEXTURE	64
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.1
 # define EPS		0.1
@@ -103,13 +103,17 @@ typedef struct s_raycast
 	t_coordd	step;
 	t_coordd	delta;
 	t_coordd	direction;
+	double		ray_length;
+	double		light_length;
+	t_coordd	norm_ray;
+	t_coordd	norm_light;
 }	t_raycast;
 
 typedef struct s_render
 {
 	uint32_t	*txtr_buf[4];
 	uint32_t	**pixels;
-
+	t_coordd	light_source;
 }	t_render;
 
 typedef struct s_game

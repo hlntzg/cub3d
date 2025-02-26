@@ -83,22 +83,45 @@ int	get_x_coordinate(t_raycast *ray, int txtr)
 {
 	int	x;
 
-	x = (int)(ray->wall_x * TXTR_PIXEL);
+	x = (int)(ray->wall_x * TEXTURE);
 	if (txtr == NORTH || txtr == EAST)
 		return (x);
 	if (txtr == SOUTH || txtr == WEST)
-		return (TXTR_PIXEL - x - 1);
+		return (TEXTURE - x - 1);
 	return (EXIT_FAILURE);
+}
+//light source coming from the North-East (1, -1).
+// Normalize the ray direction
+// Normalize the light direction
+// Compute dot product for shading
+// Ensure min brightness (fmax with 0.5)
+double	get_shading_factor(t_raycast *ray, t_render *render)
+{
+	double shading_factor;
+
+	render->light_source.x = 1.0;
+	render->light_source.y = -1.0;
+	ray->ray_length = sqrt(ray->direction.x * ray->direction.x + ray->direction.y * ray->direction.y);
+	ray->norm_ray.x = ray->direction.x / ray->ray_length;
+	ray->norm_ray.y = ray->direction.y / ray->ray_length;
+	ray->light_length = sqrt(render->light_source.x  * render->light_source.x  + render->light_source.y * render->light_source.y);
+	ray->norm_light.x  = render->light_source.x / ray->light_length;
+	ray->norm_light.y = render->light_source.y / ray->light_length;
+	shading_factor = ray->norm_ray.x * ray->norm_light.x + ray->norm_ray.y * ray->norm_light.y;
+	shading_factor = fmax(0.5, shading_factor); 
+	return (shading_factor);
 }
 
 // Reduce brightness of the color by factor (e.g., 0.6 = 60% brightness)
-uint32_t	apply_shading(uint32_t color, double factor)
+uint32_t	apply_shading(uint32_t color, t_raycast *ray, t_render *render)
 {
 	uint8_t	a;
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
+	double factor;
 
+	factor = get_shading_factor(ray, render);
 	a = (color >> 24) & 0xFF;
 	r = ((color >> 16) & 0xFF) * factor;
 	g = ((color >> 8) & 0xFF) * factor;
@@ -106,13 +129,15 @@ uint32_t	apply_shading(uint32_t color, double factor)
 	return ((a << 24) | (r << 16) | (g << 8) | b);
 }
 
+// fixed light source coming from the North-East (1, -1).
+// North-facing walls (d.y < 0) get more light.
+// South-facing walls (d.y > 0) are darker.
+// East-facing walls (d.x > 0) are brighter.
+// West-facing walls (d.x < 0) are darker.
+
 // get the pixels of the x wall strip from the corresponding texture;
 // store them in the pixel_map
-//
-// color adjustments ? for example, darken by 40% with apply_shadding
-// (only for ^2) first approach of pixel_color = (game->render->txtr_buf)
-//[txtr][(TXTR_PIXEL * ((int)txtr_y & (TXTR_PIXEL - 1))) + txtr_x];
-void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
+void get_wall_pixels(t_game *game, t_raycast *ray, int x)
 {
 	int			txtr;
 	int			txtr_x;
@@ -122,21 +147,20 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
-	txtr_scaling = (double) TXTR_PIXEL / fmax(ray->wx_height, 1.0);
-	txtr_y = (double)(ray->wx_top_pixel - game->win_h / 2 + ray->wx_height / 2)
-		* txtr_scaling;
+	txtr_scaling = (double)TEXTURE / fmax(ray->wx_height, 1.0);
+	txtr_y = (double)(ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2) * txtr_scaling;
+
 	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
 	{
 		txtr_y += txtr_scaling;
-		pixel_color = (game->render->txtr_buf)[txtr]
-		[(TXTR_PIXEL * ((int)txtr_y % TXTR_PIXEL)) + txtr_x];
-		if (txtr == NORTH || txtr == SOUTH)
-			pixel_color = apply_shading(pixel_color, 0.6);
+		pixel_color = game->render->txtr_buf[txtr][(TEXTURE * ((int)txtr_y % TEXTURE)) + txtr_x];
+		pixel_color = apply_shading(pixel_color, ray, game->render);
 		if (pixel_color > 0)
 			game->render->pixels[ray->wx_top_pixel][x] = pixel_color;
 		ray->wx_top_pixel++;
 	}
 }
+
 
 // process and render the whole image from the pixel map (screen pixels)
 // check if the pixel is in wall, floor or ceiling position
@@ -148,23 +172,23 @@ void	rendering_image(t_game *game)
 	uint32_t	y;
 
 	color = 0;
-	game->img = mlx_new_image(game->mlx, game->win_w, game->win_h);
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->img)
 		return ;
 	pixels = (uint32_t *)game->img->pixels;
 	y = 0;
-	while (y < (uint32_t)game->win_h)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < (uint32_t)game->win_w)
+		while (x < WIDTH)
 		{
 			if (game->render->pixels[y][x] > 0)
 				color = game->render->pixels[y][x];	
-			else if (y < (uint32_t)game->win_h / 2)
+			else if (y < HEIGHT / 2)
 				color = game->data->ceiling;
-			else if (y > (uint32_t)game->win_h / 2)
+			else if (y > HEIGHT / 2)
 				color = game->data->floor;
-			pixels[y * (uint32_t)game->win_w + x] = color;
+			pixels[y * WIDTH + x] = color;
 			x++;
 		}	
 		y++;

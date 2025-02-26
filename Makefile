@@ -30,7 +30,7 @@ SRCS			= main.c init_game.c validate/validate_cub.c validate/validate_textures.c
 				validate/validate_rgb.c validate/utils_validate.c validate/copy_map.c\
 				validate/validate_map.c validate/validate_walls.c\
 				read_map.c free.c images.c game_events.c move_player.c rotate_player.c\
-				player.c ray_casting.c render_game.c\
+				player.c ray_casting.c render_game.c free_pixel.c get_wall_pixels.c\
 
 SOURCES_DIR		= src
 OBJS_DIR		= obj

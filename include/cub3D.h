@@ -113,7 +113,7 @@ typedef struct s_render
 {
 	uint32_t	*txtr_buf[4];
 	uint32_t	**pixels;
-	t_coordd	light_source;
+	t_coordd	light;
 }	t_render;
 
 typedef struct s_game
@@ -195,6 +195,7 @@ char		**read_map(char *path);
 int			get_texture(t_game *game);
 
 /* FREE */
+void		clear_pixel_buffer(t_game *game);
 void		free_pixels(uint32_t **array);
 void		free_char_array(char **array);
 void		free_texture(t_game *game);

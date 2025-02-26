@@ -12,23 +12,6 @@
 
 #include "../include/cub3D.h"
 
-void	free_pixels(uint32_t **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
-	}
-	free(array);
-	array = NULL;
-}
-
 void	free_char_array(char **array)
 {
 	int	i;

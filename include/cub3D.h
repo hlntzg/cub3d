@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 13:24:16 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:53:00 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ char		**read_map(char *path);
 int			get_texture(t_game *game);
 
 /* FREE */
+void		free_pixels(uint32_t **array);
 void		free_char_array(char **array);
 void		free_texture(t_game *game);
 void		free_game(t_game *game);

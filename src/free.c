@@ -6,13 +6,13 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:18:35 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 16:34:28 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:52:50 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static void	free_pixels(uint32_t **array)
+void	free_pixels(uint32_t **array)
 {
 	int i;
 

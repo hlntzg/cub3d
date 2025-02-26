@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/26 13:32:07 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:07:14 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	get_wall_distance_and_height(t_game *game, t_raycast *ray)
 }
 
 // pixel top-left (0,0), pixel bottom-right (WIDTH, HEIGHT)
-void	get_wall_projection_pixels(t_game *game, t_player *player, t_raycast *ray)
+void	get_wall_projection_pixels(t_game *game, t_player *p, t_raycast *ray)
 {
 	int	half_window;
 	int	half_wall;
@@ -97,8 +97,8 @@ void	get_wall_projection_pixels(t_game *game, t_player *player, t_raycast *ray)
 	if (ray->wx_bottom_pixel >= game->win_h)
 		ray->wx_bottom_pixel = game->win_h - 1;
 	if (ray->boundary == 0)
-		ray->wall_x = ray->direction.y * ray->wx_distance + player->position.y;
+		ray->wall_x = ray->direction.y * ray->wx_distance + p->position.y;
 	if (ray->boundary == 1)
-		ray->wall_x = ray->direction.x * ray->wx_distance + player->position.x;
+		ray->wall_x = ray->direction.x * ray->wx_distance + p->position.x;
 	ray->wall_x -= floor(ray->wall_x);
 }

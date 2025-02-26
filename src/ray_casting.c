@@ -6,15 +6,15 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:49:26 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/26 13:16:10 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:32:07 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-void	get_ray_direction(t_player *player, t_raycast *ray, int x)
+void	get_ray_direction(t_game *game, t_player *player, t_raycast *ray, int x)
 {
-	ray->camera = 2 * x / (double)WIDTH - 1;
+	ray->camera = 2 * x / (double)game->win_w - 1;
 	ray->direction.x = player->d.x + player->p.x * ray->camera;
 	ray->direction.y = player->d.y + player->p.y * ray->camera;
 }
@@ -79,23 +79,23 @@ void	get_wall_distance_and_height(t_game *game, t_raycast *ray)
 		ray->wx_distance = ray->step.x - ray->delta.x;
 	if (ray->boundary == 1)
 		ray->wx_distance = ray->step.y - ray->delta.y;
-	ray->wx_height = (int)(HEIGHT / ray->wx_distance);
+	ray->wx_height = (int)(game->win_h / ray->wx_distance);
 }
 
 // pixel top-left (0,0), pixel bottom-right (WIDTH, HEIGHT)
-void	get_wall_projection_pixels(t_player *player, t_raycast *ray)
+void	get_wall_projection_pixels(t_game *game, t_player *player, t_raycast *ray)
 {
 	int	half_window;
 	int	half_wall;
 
-	half_window = HEIGHT / 2;
+	half_window = game->win_h / 2;
 	half_wall = ray->wx_height / 2;
 	ray->wx_top_pixel = half_window - half_wall;
 	ray->wx_bottom_pixel = half_window + half_wall;
 	if (ray->wx_top_pixel < 0)
 		ray->wx_top_pixel = 0;
-	if (ray->wx_bottom_pixel >= HEIGHT)
-		ray->wx_bottom_pixel = HEIGHT - 1;
+	if (ray->wx_bottom_pixel >= game->win_h)
+		ray->wx_bottom_pixel = game->win_h - 1;
 	if (ray->boundary == 0)
 		ray->wall_x = ray->direction.y * ray->wx_distance + player->position.y;
 	if (ray->boundary == 1)

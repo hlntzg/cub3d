@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 10:42:46 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:24:16 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_game
 	t_player	*player;
 	t_raycast	*ray;
 	t_render	*render;
+	int			win_w;
+	int			win_h;
 }	t_game;
 
 /* MAIN */
@@ -128,11 +130,11 @@ void		rendering_game(void *param);
 
 /* RAYCASTING */
 void		raycasting(t_game *game);
-void		get_ray_direction(t_player *player, t_raycast *ray, int x);
+void		get_ray_direction(t_game *game, t_player *player, t_raycast *ray, int x);
 void		get_delta_distance(t_player *player, t_raycast *ray);
 void		get_steps_distance(t_player *player, t_raycast *ray);
 void		get_wall_distance_and_height(t_game *game, t_raycast *ray);
-void		get_wall_projection_pixels(t_player *player, t_raycast *ray);
+void		get_wall_projection_pixels(t_game *game, t_player *player, t_raycast *ray);
 
 /* RENDERING */
 void		get_wall_pixels(t_game *game, t_raycast *ray, int x);

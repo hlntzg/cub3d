@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:38:53 by hutzig            #+#    #+#             */
-/*   Updated: 2025/02/26 13:16:32 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:34:04 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	clear_pixel_buffer(t_game *game)
 	int	x;
 
 	y = 0;
-	while (y < HEIGHT)
+	while (y < game->win_h)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < game->win_w)
 		{
 			game->render->pixels[y][x] = 0;
 			x++;
@@ -50,13 +50,13 @@ void	raycasting(t_game *game)
 
 	x = 0;
 	ray = game->ray;
-	while (x < WIDTH)
+	while (x < game->win_w)
 	{
-		get_ray_direction(game->player, ray, x);
+		get_ray_direction(game, game->player, ray, x);
 		get_delta_distance(game->player, ray);
 		get_steps_distance(game->player, ray);
 		get_wall_distance_and_height(game, ray);
-		get_wall_projection_pixels(game->player, ray);
+		get_wall_projection_pixels(game, game->player, ray);
 		get_wall_pixels(game, ray, x);
 		x++;
 	}
@@ -123,7 +123,7 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
 	txtr_scaling = (double) TXTR_PIXEL / fmax(ray->wx_height, 1.0);
-	txtr_y = (double)(ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2)
+	txtr_y = (double)(ray->wx_top_pixel - game->win_h / 2 + ray->wx_height / 2)
 		* txtr_scaling;
 	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
 	{
@@ -148,23 +148,23 @@ void	rendering_image(t_game *game)
 	uint32_t	y;
 
 	color = 0;
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img = mlx_new_image(game->mlx, game->win_w, game->win_h);
 	if (!game->img)
 		return ;
 	pixels = (uint32_t *)game->img->pixels;
 	y = 0;
-	while (y < HEIGHT)
+	while (y < (uint32_t)game->win_h)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < (uint32_t)game->win_w)
 		{
 			if (game->render->pixels[y][x] > 0)
 				color = game->render->pixels[y][x];	
-			else if (y < HEIGHT / 2)
+			else if (y < (uint32_t)game->win_h / 2)
 				color = game->data->ceiling;
-			else if (y > HEIGHT / 2)
+			else if (y > (uint32_t)game->win_h / 2)
 				color = game->data->floor;
-			pixels[y * WIDTH + x] = color;
+			pixels[y * (uint32_t)game->win_w + x] = color;
 			x++;
 		}	
 		y++;

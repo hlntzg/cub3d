@@ -6,7 +6,7 @@
 #    By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/22 15:11:19 by jmouette          #+#    #+#              #
-#    Updated: 2025/02/17 11:16:40 by jmouette         ###   ########.fr        #
+#    Updated: 2025/02/21 11:24:19 by jmouette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= cub3D
 
 CC				= cc
 
-CFLAGS			= -Wextra -Wall -Werror
+CFLAGS			= -Wextra -Wall -Werror -g -Wunreachable-code -Ofast -fsanitize=address
 MLX_FLAGS		= -lglfw -ldl -pthread -lm
 
 LIBFT			= ./libft/libft.a
@@ -29,7 +29,8 @@ HEADER			= ./include/cub3D.h
 SRCS			= main.c init_game.c validate/validate_cub.c validate/validate_textures.c\
 				validate/validate_rgb.c validate/utils_validate.c validate/copy_map.c\
 				validate/validate_map.c validate/validate_walls.c\
-				read_map.c free.c images.c
+				read_map.c free.c images.c game_events.c move_player.c rotate_player.c\
+				player.c ray_casting.c render_game.c\
 
 SOURCES_DIR		= src
 OBJS_DIR		= obj

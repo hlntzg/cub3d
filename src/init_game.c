@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/17 11:26:49 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:31:05 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,45 @@ static int	init_data(t_data *data)
 	data->ceiling = 0;
 	data->lines = 0;
 	data->columns = 0;
-	data->player_start.x = 0;
-	data->player_start.y = 0;
+	data->player_pos.x = 0;
+	data->player_pos.y = 0;
 	return (0);
 }
 
 int	init_game(t_game *game)
 {
+	int	i;
+
 	game->data = ft_calloc(1, sizeof(t_data));
 	if (!game->data)
 		return (ft_putstr_fd("Error : calloc failed for game->data", 2), 1);
 	if (init_data(game->data) == 1)
 		return (EXIT_FAILURE);
+	game->win_w = 640;
+	game->win_h = 360;
 	game->txtr = ft_calloc(1, sizeof(t_txtr));
 	if (!game->txtr)
 		return (ft_putstr_fd("Error : calloc failed for game->txtr", 2), 1);
-	game->img = ft_calloc(1, sizeof(t_img));
-	if (!game->img)
-		return (ft_putstr_fd("Error : calloc failed for game->img", 2), 1);
+	game->player = ft_calloc(1, sizeof(t_player));
+	if (!game->player)
+		return (ft_putstr_fd("Error : calloc failed for game->player", 2), 1);
+	game->ray = ft_calloc(1, sizeof(t_raycast));
+	if (!game->ray)
+		return (ft_putstr_fd("Error : calloc failed for game->ray", 2), 1);
+	game->render = ft_calloc(1, sizeof(t_render));
+	if (!game->render)
+		return (ft_putstr_fd("Error : calloc failed for game->render", 2), 1);
+	game->render->pixels = ft_calloc(game->win_h + 1, sizeof(uint32_t *));
+	if (!game->render->pixels)
+		return (ft_putstr_fd("Memory allocation failed for pixels" , 2), 1);
+	i = 0;
+	while (i < game->win_h)
+	{
+		game->render->pixels[i] = ft_calloc(game->win_w, sizeof(uint32_t));
+		if (!game->render->pixels[i])
+			return (ft_putstr_fd("Memory allocation failed for pixels row", 2), 1);
+		i++;
+	}
+	game->img = NULL;
 	return (EXIT_SUCCESS);
 }

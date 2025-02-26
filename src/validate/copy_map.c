@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 14:53:34 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/18 16:13:25 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:55:42 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,20 @@ static int	copy_map(t_data *data, char **cub_content, int map_start, int i)
 	return (EXIT_SUCCESS);
 }
 
+int	empty_lines(char *line)
+{
+	int	j;
+
+	j = 0;
+	while (line[j] != '\0')
+	{
+		if (line[j] != ' ' && line[j] != '\t')
+			return (0);
+		j++;
+	}
+	return (1);
+}
+
 int	read_copy_map(char **cub_content, t_data *data)
 {
 	int	i;
@@ -114,7 +128,7 @@ int	read_copy_map(char **cub_content, t_data *data)
 				i++;
 			while (cub_content[i] != NULL)
 			{
-				if (is_map(cub_content[i]) != 2)
+				if (is_map(cub_content[i]) != 2 && !empty_lines(cub_content[i]))
 					return (printf("Error\nMap is not at the end.\n"), 1);
 				i++;
 			}

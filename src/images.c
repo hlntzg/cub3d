@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 14:28:52 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 13:15:06 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:25:31 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@ uint32_t	get_pixel_color(int i, int j, mlx_texture_t *texture)
 	index = (i * texture->width + j) * 4;
 	return (*(uint32_t *)(texture->pixels + index));
 }
-
-// uint32_t	store_color(int i, int j, mlx_texture_t *texture)
-// {
-// 	int		index;
-// 	uint8_t	r;
-// 	uint8_t	g;
-// 	uint8_t	b;
-// 	uint8_t	a;
-
-// 	index = (i * texture->width + j) * 4;
-// 	r = texture->pixels[index];
-// 	g = texture->pixels[index + 1];
-// 	b = texture->pixels[index + 2];
-// 	a = texture->pixels[index + 3];
-// 	return (create_color((int)a, (int)b, (int)g, (int)r));
-// }
 
 int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 {
@@ -77,6 +61,5 @@ int	get_texture(t_game *game)
 		return (EXIT_FAILURE);
 	if (set_texture_buffer(game, game->txtr->we, 3) == 1)
 		return (EXIT_FAILURE);
-	free_texture(game);
 	return (EXIT_SUCCESS);
 }

@@ -114,6 +114,7 @@ typedef struct s_render
 	uint32_t	*txtr_buf[4];
 	uint32_t	**pixels;
 	t_coordd	light;
+	double		brightness;
 }	t_render;
 
 typedef struct s_game
@@ -149,6 +150,7 @@ int			init_game(t_game *game);
 
 /* GAME */
 void		game_events(mlx_key_data_t keydata, void *param);
+void		game_light(mlx_key_data_t keydata, void *param);
 void		move_player(t_game *game);
 void		set_player(t_game *game, t_player *player);
 

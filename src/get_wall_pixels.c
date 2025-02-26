@@ -52,8 +52,6 @@ static double	get_shading_factor(t_raycast *ray, t_render *render)
 	double	dot_x;
 	double	dot_y;
 
-	render->light.x = 1.0;
-	render->light.y = -1.0;
 	ray->ray_length = sqrt(ray->direction.x * ray->direction.x
 			+ ray->direction.y * ray->direction.y);
 	ray->norm_ray.x = ray->direction.x / ray->ray_length;
@@ -65,7 +63,7 @@ static double	get_shading_factor(t_raycast *ray, t_render *render)
 	dot_x = ray->norm_ray.x * ray->norm_light.x;
 	dot_y = ray->norm_ray.y * ray->norm_light.y;
 	factor = dot_x + dot_y;
-	factor = fmax(0.5, factor);
+	factor = fmax(render->brightness, factor);
 	return (factor);
 }
 

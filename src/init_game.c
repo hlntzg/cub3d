@@ -54,6 +54,9 @@ int	init_render(t_game *game)
 			return (ft_putstr_fd("Memory allocation failed for pixels", 2), 1);
 		i++;
 	}
+	game->render->light.x = 1.0;
+	game->render->light.y = -1.0;
+	game->render->brightness = 0.5;
 	return (EXIT_SUCCESS);
 }
 

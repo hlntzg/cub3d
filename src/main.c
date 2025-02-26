@@ -45,7 +45,7 @@ int	start_game(t_game *game)
 		return (EXIT_FAILURE);
 	set_player(game, game->player);
 	mlx_key_hook(game->mlx, &game_events, game);
-	mlx_key_hook(game->mlx, &game_events, game);
+	mlx_key_hook(game->mlx, &game_light, game);
 	mlx_loop_hook(game->mlx, &rendering_game, game);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:42:21 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 17:27:47 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:36:19 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define TXTR_PIXEL	64
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.1
+# define COLLISION_OFFSET 0.2
+
 
 typedef enum s_orientation
 {

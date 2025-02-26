@@ -12,21 +12,30 @@
 
 #include "../include/cub3D.h"
 
-uint32_t	store_color(int i, int j, mlx_texture_t *texture)
+// Read 4 bytes directly
+uint32_t	get_pixel_color(int i, int j, mlx_texture_t *texture)
 {
-	int		index;
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
-	uint8_t	a;
+	int	index;
 
 	index = (i * texture->width + j) * 4;
-	r = texture->pixels[index];
-	g = texture->pixels[index + 1];
-	b = texture->pixels[index + 2];
-	a = texture->pixels[index + 3];
-	return (create_color((int)a, (int)b, (int)g, (int)r));
+	return (*(uint32_t *)(texture->pixels + index));
 }
+
+// uint32_t	store_color(int i, int j, mlx_texture_t *texture)
+// {
+// 	int		index;
+// 	uint8_t	r;
+// 	uint8_t	g;
+// 	uint8_t	b;
+// 	uint8_t	a;
+
+// 	index = (i * texture->width + j) * 4;
+// 	r = texture->pixels[index];
+// 	g = texture->pixels[index + 1];
+// 	b = texture->pixels[index + 2];
+// 	a = texture->pixels[index + 3];
+// 	return (create_color((int)a, (int)b, (int)g, (int)r));
+// }
 
 int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 {
@@ -43,7 +52,7 @@ int	set_texture_buffer(t_game *game, mlx_texture_t *texture, int orientation)
 		j = 0;
 		while (j < texture->width)
 		{
-			pixels[i * texture->width + j] = store_color(i, j, texture);
+			pixels[i * texture->width + j] = get_pixel_color(i, j, texture);
 			j++;
 		}
 		i++;

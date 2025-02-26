@@ -1,7 +1,7 @@
 F                                       255,255,255
 
 
-WE               ./textures/wall_west.png
+WE               ./textures/test.png
 
 NO ./textures/red.png
 SO               ./textures/blue.png
@@ -9,7 +9,11 @@ SO               ./textures/blue.png
 	
 C 0,0,0
 
-1111111
-1000001
-10000S1
-111111
+111111111
+100000001
+100000001
+111100001
+100000111
+1000N0001
+100000001
+111111111

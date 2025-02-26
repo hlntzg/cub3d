@@ -91,14 +91,36 @@ int	get_x_coordinate(t_raycast *ray, int txtr)
 	return (EXIT_FAILURE);
 }
 
+double	get_shading_factor(t_raycast *ray)
+{
+	double shading_factor;
+	
+	// Normalize the ray direction
+	double ray_length = sqrt(ray->direction.x * ray->direction.x + ray->direction.y * ray->direction.y);
+	double norm_ray_x = ray->direction.x / ray_length;
+	double norm_ray_y = ray->direction.y / ray_length;
+
+	// Normalize the light direction
+	double light_length = sqrt(LIGHT_DIR_X * LIGHT_DIR_X + LIGHT_DIR_Y * LIGHT_DIR_Y);
+	double norm_light_x = LIGHT_DIR_X / light_length;
+	double norm_light_y = LIGHT_DIR_Y / light_length;
+
+	// Compute dot product for shading
+	shading_factor = norm_ray_x * norm_light_x + norm_ray_y * norm_light_y;
+	shading_factor = fmax(0.5, shading_factor); // Ensure min brightness
+	return (shading_factor);
+}
+
 // Reduce brightness of the color by factor (e.g., 0.6 = 60% brightness)
-uint32_t	apply_shading(uint32_t color, double factor)
+uint32_t	apply_shading(uint32_t color, t_raycast *ray)
 {
 	uint8_t	a;
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
+	double factor;
 
+	factor = get_shading_factor(ray);
 	a = (color >> 24) & 0xFF;
 	r = ((color >> 16) & 0xFF) * factor;
 	g = ((color >> 8) & 0xFF) * factor;
@@ -112,7 +134,7 @@ uint32_t	apply_shading(uint32_t color, double factor)
 // color adjustments ? for example, darken by 40% with apply_shadding
 // (only for ^2) first approach of pixel_color = (game->render->txtr_buf)
 //[txtr][(TXTR_PIXEL * ((int)txtr_y & (TXTR_PIXEL - 1))) + txtr_x];
-void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
+/*void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 {
 	int			txtr;
 	int			txtr_x;
@@ -120,6 +142,10 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 	double		txtr_scaling;
 	uint32_t	pixel_color;
 
+	// printf("player p x %f\n", game->player->p.x);
+	// printf("player p y %f\n", game->player->p.y);
+	// printf("player d x %f\n", game->player->d.x);
+	// printf("player d y %f\n", game->player->d.y);
 	txtr = get_orientation(ray);
 	txtr_x = get_x_coordinate(ray, txtr);
 	txtr_scaling = (double) TXTR_PIXEL / fmax(ray->wx_height, 1.0);
@@ -130,13 +156,45 @@ void	get_wall_pixels(t_game *game, t_raycast *ray, int x)
 		txtr_y += txtr_scaling;
 		pixel_color = (game->render->txtr_buf)[txtr]
 		[(TXTR_PIXEL * ((int)txtr_y % TXTR_PIXEL)) + txtr_x];
-		if (txtr == NORTH || txtr == SOUTH)
-			pixel_color = apply_shading(pixel_color, 0.6);
+		// if (txtr == NORTH || txtr == SOUTH)
+		//	pixel_color = apply_shading(pixel_color, 0.6);
+		if (pixel_color > 0)
+			game->render->pixels[ray->wx_top_pixel][x] = pixel_color;
+		ray->wx_top_pixel++;
+	}
+}*/
+// fixed light source coming from the North-East (1, -1).
+// North-facing walls (d.y < 0) get more light.
+// South-facing walls (d.y > 0) are darker.
+// East-facing walls (d.x > 0) are brighter.
+// West-facing walls (d.x < 0) are darker.
+
+
+
+void get_wall_pixels(t_game *game, t_raycast *ray, int x)
+{
+	int			txtr;
+	int			txtr_x;
+	double		txtr_y;
+	double		txtr_scaling;
+	uint32_t	pixel_color;
+
+	txtr = get_orientation(ray);
+	txtr_x = get_x_coordinate(ray, txtr);
+	txtr_scaling = (double)TXTR_PIXEL / fmax(ray->wx_height, 1.0);
+	txtr_y = (double)(ray->wx_top_pixel - HEIGHT / 2 + ray->wx_height / 2) * txtr_scaling;
+
+	while (ray->wx_top_pixel < ray->wx_bottom_pixel)
+	{
+		txtr_y += txtr_scaling;
+		pixel_color = game->render->txtr_buf[txtr][(TXTR_PIXEL * ((int)txtr_y % TXTR_PIXEL)) + txtr_x];
+		pixel_color = apply_shading(pixel_color, ray);
 		if (pixel_color > 0)
 			game->render->pixels[ray->wx_top_pixel][x] = pixel_color;
 		ray->wx_top_pixel++;
 	}
 }
+
 
 // process and render the whole image from the pixel map (screen pixels)
 // check if the pixel is in wall, floor or ceiling position

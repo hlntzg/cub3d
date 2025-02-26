@@ -20,7 +20,7 @@ void	move_player_forward(t_game *game)
 
 	p = &game->player->position;
 
-	printf("position: %f %f\n", p->x, p->y);
+	//printf("position: %f %f\n", p->x, p->y);
 	new_x = p->x + game->player->d.x * MOVE_SPEED;
 	new_y = p->y + game->player->d.y * MOVE_SPEED;
 	if (game->data->map[(int)new_y][(int)new_x] != '1')
@@ -28,7 +28,7 @@ void	move_player_forward(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
+	//printf("position: %f %f\n", p->x, p->y);
 }
 
 void	move_player_backward(t_game *game)
@@ -45,7 +45,7 @@ void	move_player_backward(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
+	//printf("position: %f %f\n", p->x, p->y);
 }
 
 void	move_player_right(t_game *game)
@@ -62,7 +62,7 @@ void	move_player_right(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
+	//printf("position right: %f %f\n", p->x, p->y);
 }
 
 void	move_player_left(t_game *game)
@@ -80,5 +80,5 @@ void	move_player_left(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
+	//printf("position left: %f %f\n", p->x, p->y);
 }

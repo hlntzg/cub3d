@@ -21,11 +21,13 @@
 # include <errno.h>
 # include <string.h>
 
-# define WIDTH		640
-# define HEIGHT		360
+# define WIDTH		2000
+# define HEIGHT		1000
 # define TXTR_PIXEL	64
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.1
+# define LIGHT_DIR_X  0.5
+# define LIGHT_DIR_Y -1.0
 
 typedef enum s_orientation
 {

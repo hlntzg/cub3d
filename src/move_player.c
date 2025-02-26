@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 16:47:33 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 14:10:30 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:36:25 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	move_player_forward(t_game *game)
 	{	
 		p->x = new_x;
 		p->y = new_y;
-	}	
-	printf("position: %f %f\n", p->x, p->y);
+	}
 }
 
 void	move_player_backward(t_game *game)
@@ -49,7 +48,6 @@ void	move_player_backward(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
 }
 
 void	move_player_right(t_game *game)
@@ -69,7 +67,6 @@ void	move_player_right(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
 }
 
 void	move_player_left(t_game *game)
@@ -89,5 +86,4 @@ void	move_player_left(t_game *game)
 		p->x = new_x;
 		p->y = new_y;
 	}
-	printf("position: %f %f\n", p->x, p->y);
 }

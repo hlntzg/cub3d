@@ -111,5 +111,3 @@ int	empty_lines(char *line)
 	}
 	return (1);
 }
-
-

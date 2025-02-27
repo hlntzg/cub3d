@@ -23,7 +23,7 @@
 
 # define WIDTH		1000
 # define HEIGHT		600
-# define TEXTURE	64
+# define TEXTURE	640
 # define MOVE_SPEED	0.1
 # define ROT_SPEED	0.1
 # define EPS		0.1
@@ -135,11 +135,13 @@ void		rendering_game(void *param);
 
 /* RAYCASTING */
 void		raycasting(t_game *game);
-void		get_ray_direction(t_game *game, t_player *player, t_raycast *ray, int x);
+void		get_ray_direction(t_game *game, t_player *player,
+				t_raycast *ray, int x);
 void		get_delta_distance(t_player *player, t_raycast *ray);
 void		get_steps_distance(t_player *player, t_raycast *ray);
 void		get_wall_distance_and_height(t_game *game, t_raycast *ray);
-void		get_wall_projection_pixels(t_game *game, t_player *player, t_raycast *ray);
+void		get_wall_projection_pixels(t_game *game,
+				t_player *player, t_raycast *ray);
 
 /* RENDERING */
 void		get_wall_pixels(t_game *game, t_raycast *ray, int x);
@@ -150,7 +152,6 @@ int			init_game(t_game *game);
 
 /* GAME */
 void		game_events(mlx_key_data_t keydata, void *param);
-void		game_light(mlx_key_data_t keydata, void *param);
 void		move_player(t_game *game);
 void		set_player(t_game *game, t_player *player);
 
@@ -161,8 +162,8 @@ void		move_player_forward(t_game *game);
 void		move_player_backward(t_game *game);
 
 /* ROTATE_PLAYER */
-void		rotate_player_right(t_game *game);
-void		rotate_player_left(t_game *game);
+void		rotate_player_right(t_game *game, t_render *r);
+void		rotate_player_left(t_game *game, t_render *r);
 
 /* VALIDATE_CUB */
 int			validate_cub(char *map_name, t_game *game);

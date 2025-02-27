@@ -12,11 +12,12 @@
 
 #include "../include/cub3D.h"
 
-void	rotate_player_right(t_game *game)
+void	rotate_player_right(t_game *game, t_render *r)
 {
 	t_player	*p;
 	double		prev_dx;
 	double		prev_px;
+	double		prev_light_x;
 
 	p = game->player;
 	prev_dx = p->d.x;
@@ -25,13 +26,17 @@ void	rotate_player_right(t_game *game)
 	p->d.y = prev_dx * sin(ROT_SPEED) + p->d.y * cos(ROT_SPEED);
 	p->p.x = p->p.x * cos(ROT_SPEED) - p->p.y * sin(ROT_SPEED);
 	p->p.y = prev_px * sin(ROT_SPEED) + p->p.y * cos(ROT_SPEED);
+	prev_light_x = r->light.x;
+	r->light.x = r->light.x * cos(ROT_SPEED) - r->light.y * sin(ROT_SPEED);
+	r->light.y = prev_light_x * sin(ROT_SPEED) + r->light.y * cos(ROT_SPEED);
 }
 
-void	rotate_player_left(t_game *game)
+void	rotate_player_left(t_game *game, t_render *r)
 {
 	t_player	*p;
 	double		prev_dx;
 	double		prev_px;
+	double		prev_light_x;
 
 	p = game->player;
 	prev_dx = p->d.x;
@@ -40,4 +45,7 @@ void	rotate_player_left(t_game *game)
 	p->d.y = prev_dx * sin(-ROT_SPEED) + p->d.y * cos(-ROT_SPEED);
 	p->p.x = p->p.x * cos(-ROT_SPEED) - p->p.y * sin(-ROT_SPEED);
 	p->p.y = prev_px * sin(-ROT_SPEED) + p->p.y * cos(-ROT_SPEED);
+	prev_light_x = r->light.x;
+	r->light.x = r->light.x * cos(-ROT_SPEED) - r->light.y * sin(-ROT_SPEED);
+	r->light.y = prev_light_x * sin(-ROT_SPEED) + r->light.y * cos(-ROT_SPEED);
 }

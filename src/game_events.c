@@ -46,6 +46,10 @@ void	game_events(mlx_key_data_t keydata, void *param)
 			game->player->rotate_left = true;
 		else if (keydata.key == MLX_KEY_RIGHT)
 			game->player->rotate_right = true;
+		if (keydata.key == MLX_KEY_UP && game->render->brightness < 0.9)
+			game->render->brightness += 0.1;
+		else if (keydata.key == MLX_KEY_DOWN && game->render->brightness > 0)
+			game->render->brightness -= 0.1;
 	}
 	game_events_release(keydata, game);
 }
@@ -61,7 +65,7 @@ void	move_player(t_game *game)
 	else if (game->player->move_forward)
 		move_player_forward(game);
 	else if (game->player->rotate_left)
-		rotate_player_left(game);
+		rotate_player_left(game, game->render);
 	else if (game->player->rotate_right)
-		rotate_player_right(game);
+		rotate_player_right(game, game->render);
 }

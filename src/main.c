@@ -38,8 +38,6 @@ void	resize_window(int width, int height, void *param)
 
 int	start_game(t_game *game)
 {
-	if (get_texture(game) == 1)
-		return (EXIT_FAILURE);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (!game->mlx)
 		return (EXIT_FAILURE);
@@ -62,6 +60,8 @@ int	main(int argc, char **argv)
 	if (init_game(&game) == 1)
 		return (free_game(&game), EXIT_FAILURE);
 	if (validate_cub(argv[1], &game) == 1)
+		return (free_game(&game), EXIT_FAILURE);
+	if (get_texture(&game) == 1)
 		return (free_game(&game), EXIT_FAILURE);
 	if (start_game(&game) == 1)
 		return (exit_game(&game), EXIT_FAILURE);

@@ -50,6 +50,9 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX42_BUILD_DIR)/libmlx42.a:
+	@if [ ! -d "$(MLX42_DIR)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR); \
+	fi
 	mkdir -p $(MLX42_BUILD_DIR)
 	cd $(MLX42_DIR) && cmake -B build && cmake --build build -j4
 

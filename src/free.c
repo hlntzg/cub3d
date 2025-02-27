@@ -83,7 +83,10 @@ void	free_game(t_game *game)
 void	exit_game(t_game *game)
 {
 	free_game(game);
-	mlx_close_window(game->mlx);
-	mlx_terminate(game->mlx);
+	if (game->mlx)
+	{
+		mlx_close_window(game->mlx);
+		mlx_terminate(game->mlx);
+	}
 	exit (0);
 }

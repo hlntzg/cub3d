@@ -21,7 +21,9 @@ static int	fill(t_data *data, t_coord size, int row, int col)
 	}
 	if (data->map_access[row][col] == '1')
 		return (0);
-	if (data->map_access[row][col] == ' ' || data->map_access[row][col] == '\t')
+	if (data->map_access[row][col] == ' ')
+		data->map[row][col] = '0';
+	if (data->map_access[row][col] == '\t')
 	{
 		ft_putstr_fd("Error\nMap is not enclosed by walls!\n", 2);
 		return (EXIT_FAILURE);

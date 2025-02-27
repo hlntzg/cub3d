@@ -19,11 +19,21 @@ char	*extract(char **map, int i, int j, char *extract)
 	k = 0;
 	while (map[i][j] == ' ')
 		j++;
-	while (map[i][j] != ' ' && map[i][j] != '\0' && k < 255)
+	while (map[i][j] != ' ' && map[i][j] != '\0')
 	{
 		extract[k] = map[i][j];
 		j++;
 		k++;
+	}
+	while (map[i][j] != '\0')
+	{
+		if (map[i][j] != ' ')
+		{
+			extract[i] = '\0';
+			extract = NULL;
+			return (NULL);
+		}
+		j++;
 	}
 	extract[k] = '\0';
 	return (extract);

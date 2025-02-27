@@ -21,7 +21,7 @@ static uint32_t	extract_rgb(char **map, int i, int j, uint32_t rbg_type)
 	k = 0;
 	rgb = ft_calloc(256, sizeof(char));
 	if (rgb == NULL)
-		return (ft_putstr_fd("Error : calloc failed for rgb", 2), '\0');
+		return (ft_putstr_fd("Error\n calloc failed for rgb\n", 2), '\0');
 	extract(map, i, j, rgb);
 	if (check_rgb(rgb) == 1)
 		return (free(rgb), '\0');

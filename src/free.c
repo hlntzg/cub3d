@@ -12,23 +12,6 @@
 
 #include "../include/cub3D.h"
 
-void	free_pixels(uint32_t **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
-	}
-	free(array);
-	array = NULL;
-}
-
 void	free_char_array(char **array)
 {
 	int	i;
@@ -100,7 +83,10 @@ void	free_game(t_game *game)
 void	exit_game(t_game *game)
 {
 	free_game(game);
-	mlx_close_window(game->mlx);
-	mlx_terminate(game->mlx);
+	if (game->mlx)
+	{
+		mlx_close_window(game->mlx);
+		mlx_terminate(game->mlx);
+	}
 	exit (0);
 }

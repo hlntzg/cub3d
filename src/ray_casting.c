@@ -95,7 +95,7 @@ void	get_wall_projection_pixels(t_game *game, t_player *p, t_raycast *ray)
 	if (ray->wx_top_pixel < 0)
 		ray->wx_top_pixel = 0;
 	if (ray->wx_bottom_pixel >= game->win_h)
-		ray->wx_bottom_pixel = game->win_h - 1;
+		ray->wx_bottom_pixel = game->win_h;
 	if (ray->boundary == 0)
 		ray->wall_x = ray->direction.y * ray->wx_distance + p->position.y;
 	if (ray->boundary == 1)

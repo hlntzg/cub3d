@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 16:20:47 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/26 14:14:11 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:38:47 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	init_render(t_game *game)
 			return (ft_putstr_fd("Memory allocation failed for pixels", 2), 1);
 		i++;
 	}
+	game->render->light.x = 1.0;
+	game->render->light.y = -1.0;
+	game->render->brightness = 0.5;
 	return (EXIT_SUCCESS);
 }
 
@@ -64,8 +67,8 @@ int	init_game(t_game *game)
 		return (ft_putstr_fd("Error : calloc failed for game->data", 2), 1);
 	if (init_data(game->data) == 1)
 		return (EXIT_FAILURE);
-	game->win_w = 640;
-	game->win_h = 360;
+	game->win_w = WIDTH;
+	game->win_h = HEIGHT;
 	game->txtr = ft_calloc(1, sizeof(t_txtr));
 	if (!game->txtr)
 		return (ft_putstr_fd("Error : calloc failed for game->txtr", 2), 1);

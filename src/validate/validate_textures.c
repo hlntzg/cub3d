@@ -39,6 +39,8 @@ static int	process_texture(char **map, char *texture_type, char a, char b)
 			if (is_duplicate_texture(texture_type) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 			texture_type = extract(map, i, j, texture_type);
+			if (texture_type == NULL)
+				return (ft_putstr_fd("Error\nInvalid texture.\n", 2), 1);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 #    By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/22 15:11:19 by jmouette          #+#    #+#              #
-#    Updated: 2025/02/21 11:24:19 by jmouette         ###   ########.fr        #
+#    Updated: 2025/02/26 16:44:05 by jmouette         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= cub3D
 
 CC				= cc
 
-CFLAGS			= -Wextra -Wall -Werror -g -Wunreachable-code -Ofast -fsanitize=address
+CFLAGS			= -Wextra -Wall -Werror #-g -Wunreachable-code -Ofast -fsanitize=address
 MLX_FLAGS		= -lglfw -ldl -pthread -lm
 
 LIBFT			= ./libft/libft.a
@@ -30,7 +30,7 @@ SRCS			= main.c init_game.c validate/validate_cub.c validate/validate_textures.c
 				validate/validate_rgb.c validate/utils_validate.c validate/copy_map.c\
 				validate/validate_map.c validate/validate_walls.c\
 				read_map.c free.c images.c game_events.c move_player.c rotate_player.c\
-				player.c ray_casting.c render_game.c\
+				player.c ray_casting.c render_game.c free_pixel.c get_wall_pixels.c\
 
 SOURCES_DIR		= src
 OBJS_DIR		= obj
@@ -50,6 +50,9 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX42_BUILD_DIR)/libmlx42.a:
+	@if [ ! -d "$(MLX42_DIR)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX42_DIR); \
+	fi
 	mkdir -p $(MLX42_BUILD_DIR)
 	cd $(MLX42_DIR) && cmake -B build && cmake --build build -j4
 

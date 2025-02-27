@@ -6,7 +6,7 @@
 /*   By: jmouette <jmouette@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:53:36 by jmouette          #+#    #+#             */
-/*   Updated: 2025/02/25 17:27:14 by jmouette         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:29:34 by jmouette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,21 @@ char	*extract(char **map, int i, int j, char *extract)
 	k = 0;
 	while (map[i][j] == ' ')
 		j++;
-	while (map[i][j] != ' ' && map[i][j] != '\0' && k < 255)
+	while (map[i][j] != ' ' && map[i][j] != '\0')
 	{
 		extract[k] = map[i][j];
 		j++;
 		k++;
+	}
+	while (map[i][j] != '\0')
+	{
+		if (map[i][j] != ' ')
+		{
+			extract[i] = '\0';
+			extract = NULL;
+			return (NULL);
+		}
+		j++;
 	}
 	extract[k] = '\0';
 	return (extract);
@@ -41,7 +51,7 @@ int	is_duplicate_rgb(uint32_t rbg_type)
 
 uint32_t	create_color(int r, int g, int b, int a)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	return (a << 24 | b << 16 | g << 8 | r);
 }
 
 int	check_rgb(char *rgb)

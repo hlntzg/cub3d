@@ -71,6 +71,12 @@ The player's starting position is indicated by N, S, E, or W, representing North
 
 Once the game is running, you can explore the 3D world using the movement keys. The game will continuously render the environment in real-time, updating the player's view as they move around.
 
+### License
+
+This project is licensed under a custom Educational Use License. It is intended 
+for personal and academic use within Hive Helsinki and the 42 Network. See [LICENSE](./LICENSE) for full terms.
+
+
 ------
 <p align="center">
 	Made by Helena Utzig (@hutzig) and Juliette Mouette (@jmouette) <br>
